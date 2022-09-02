@@ -1,0 +1,28 @@
+.file_container 
+  height: 160px
+  position: relative
+
+.drag-n-drop 
+  color: transparent
+
+.drag-n-drop::-webkit-file-upload-button 
+  visibility: hidden
+
+.drag-n-drop::after 
+  width: 100%
+  height: 100%
+  position: absolute
+  top: 0
+  left: 0
+  display: inline-block
+  border: solid black 3px
+  content: "drag and drop \a or click here to add files"
+  color: black
+  text-align: center
+  padding-top: 45px
+  vertical-align: middle
+
+
+
+.preview_img
+  width: 200px

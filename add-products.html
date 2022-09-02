@@ -10,7 +10,7 @@
   </head>
   <body class="container">
     <div class="row">
-      <form action="#" class="col-lg-6 d-flex flex-column">
+      <form action="#" class="col-lg-6 d-flex flex-column" id="product_form">
         <label for="title">Product title</label>
         <input type="text" name="title" id="title" />
         <label for="price">Product Price</label>
@@ -74,13 +74,16 @@
         <div class="file_container my-2">
           <input
             type="file"
-            name="images"
+            name="files"
             id="images"
             accept="images/jpeg"
             class="drag-n-drop"
             value="drag and drop images here"
+            multiple
           />
         </div>
+        <div id="upload-preview"></div>
+        <button type="submit">preview</button>
       </form>
       <section class="col-lg-6">
         <div class="card m-auto mt-5" style="width: 72%">

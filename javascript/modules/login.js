@@ -11,10 +11,12 @@ export function loginFormSetup(form) {
     const password = e.path[0][1].value;
     if (validateLength(userName, minLen) && validateLength(password, minLen)) {
       const currentUser = new user(adminUrl, userName, password);
-      currentUser.login();
-      localStorage.setItem("user", JSON.stringify(currentUser));
-      clearForm(e);
+      currentUser.login().then(() => {
+        localStorage.setItem("user", JSON.stringify(currentUser));
+        clearForm(e);
+      });
     } else {
+      console.log("wrong!");
     }
   });
 }

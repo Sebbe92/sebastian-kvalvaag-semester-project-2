@@ -1,0 +1,121 @@
+@font-face {
+  font-family: "InriaSerif Regular";
+  src: url("../fonts/Web/InriaSerif-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "InriaSerif Bold";
+  src: url("../fonts/Web/InriaSerif-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "InriaSerif Light";
+  src: url("../fonts/Web/InriaSerif-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Krub Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Krub Regular"), url("../fonts/Web/Krub-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Krub Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Krub Italic"), url("Krub-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Krub Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Krub Bold"), url("Krub-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Krub Light Italic';
+  font-style: normal;
+  font-weight: normal;
+  src: local("Krub Light Italic"), url("Krub-LightItalic.woff") format("woff");
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: InriaSerif Regular, Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+p {
+  font-family: Krub Regular, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 300;
+}
+
+.small-img img {
+  width: 100%;
+  aspect-ratio: 1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top center;
+     object-position: top center;
+}
+
+.big-img img {
+  width: 100%;
+  aspect-ratio: 1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top center;
+     object-position: top center;
+}
+
+.file_container {
+  height: 160px;
+  position: relative;
+}
+
+.drag-n-drop {
+  color: transparent;
+}
+
+.drag-n-drop::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.drag-n-drop::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  border: solid black 3px;
+  content: "drag and drop \a or click here to add files";
+  color: black;
+  text-align: center;
+  padding-top: 45px;
+  vertical-align: middle;
+}
+
+.preview_img {
+  width: 200px;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  border: 2px black solid;
+}
+
+.bg-red {
+  background-color: #ff0000;
+}
+
+.bg-green {
+  background-color: #07bd10;
+}
+
+.bg-blue {
+  background-color: #1200d5;
+}
+/*# sourceMappingURL=custom.css.map */
