@@ -1,5 +1,6 @@
 const productURL = "https://itsuitesyou.herokuapp.com/products";
 const uploadURL = "https://itsuitesyou.herokuapp.com/upload";
+const filesURL = "https://itsuitesyou.herokuapp.com/upload/files";
 export async function getJWT(apiUrl, userName, password) {
   try {
     const response = await fetch(apiUrl, {
@@ -14,7 +15,7 @@ export async function getJWT(apiUrl, userName, password) {
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result.jwt;
   } catch (error) {
     console.error(error);
@@ -57,10 +58,19 @@ export async function uploadImg(form, jwt) {
       body: new FormData(form),
     });
     const response = await result.json();
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-export function GetImgById(id) {}
+export async function GetImgById(id) {
+  try {
+    const response = await fetch(filesURL + `/${id}`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}

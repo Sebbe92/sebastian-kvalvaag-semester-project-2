@@ -2,63 +2,108 @@ import { getProduct, postProduct, uploadImg } from "./modules/apiCalls.js";
 import { loginFormSetup } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
+import { addDropdownListeners, makeForm } from "./modules/forms.js";
 import { imagePreview } from "./utils/utils.js";
+import {
+  productFormContainer,
+  body,
+  dropdownLis,
+  productForm,
+  loginForm,
+  dropdown,
+  productContainer,
+  currentUser,
+} from "./utils/constants.js";
 
-getProduct(13).then((productObject) => {
-  const currentProduct = new product(
-    productObject.title,
-    productObject.price,
-    productObject.description
-  );
-  currentProduct.parseDescription();
-  console.log(currentProduct);
-});
-const productForm = document.querySelector("#product_form");
-
-const productContainer = document.querySelector("#product_container");
-
-const currentUser = localStorage.getItem("user");
-//move too variables file
-const loginForm = document.querySelector("#login_form");
-const dropdown = document.querySelectorAll(".dropdown-toggle");
-
-/* loginFormSetup(loginForm); */
-
-function dropDownMenu(dropdowns) {
-  dropdowns.forEach((dropdown) => {
-    dropdown.addEventListener("click", (e) => {
-      e.path[1].children[1].classList.toggle("d-block");
-      e.path[1].children[1].classList.toggle("d-none");
-    });
+if (productFormContainer) {
+  makeForm(productFormContainer);
+}
+if (productContainer) {
+  getProduct(30).then((productObject) => {
+    const currentProduct = new product(
+      productObject.title,
+      productObject.price,
+      productObject.description
+    );
+    currentProduct.parseDescription();
+    currentProduct.makeDescriptionObject();
+    currentProduct.createProductPage(body);
+    console.log(currentProduct);
+    /* createProductPage(currentProduct, productContainer); */
   });
 }
-/* dropDownMenu(dropdown); */
 
-/* createProductPage(fakeProduct, productContainer); */
+if (loginForm) {
+  loginFormSetup(loginForm);
+}
+
+dropdownLis.forEach((li) => {
+  li.addEventListener("click", (e) => {
+    if (!e.target.children[0].checked) {
+      e.target.children[0].checked = true;
+    } else {
+      e.target.children[0].checked = false;
+    }
+  });
+});
+
+addDropdownListeners();
+
+
 const tempjwt =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjYxOTE0MDQ1LCJleHAiOjE2NjQ1MDYwNDV9.MTPzWqPRUKqvZXrd9c2aH_VpslKlMSHRWQayPurU0TI";
-
+let filesToUpload = [];
+let imageInfo = [];
 const formImages = document.querySelector("#images");
 const uploadPreview = document.querySelector("#upload-preview");
+if (formImages) {
+  formImages.addEventListener("change", (e) => {
+    filesToUpload.push(e);
+    imagePreview(e, uploadPreview);
+    console.log(filesToUpload);
+  });
+}
+if (productForm) {
+  productForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-formImages.addEventListener("change", (e) => {
-  imagePreview(e, uploadPreview);
-});
-
-productForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  makeProductFromForm(e);
-});
-
+    makeProductFromForm(e);
+  });
+}
+async function pushFilesToUpload(fileEvents) {
+  fileEvents.forEach(async (fileEvent) => {
+    console.log(await uploadImg(fileEvent.path[2], tempjwt));
+  });
+}
 async function makeProductFromForm(e) {
-  /* const imgInfo = getImageObject(await uploadImg(e.target, tempjwt)); */
+  const colors = [];
+  const sizes = [];
+  const categories = [];
+  const image_url = imageInfo;
+  filesToUpload.forEach((file) => {
+    pushFilesToUpload(file);
+  });
+  for (var i = 0; i < e.target.length; i++) {
+    const input = e.target[i];
 
+    if (input.name == "Colors" && input.checked == true) {
+      colors.push(input.id);
+    } else if (input.name == "Sizes" && input.checked == true) {
+      sizes.push(input.id);
+    } else if (input.name == "Categories" && input.checked == true) {
+      categories.push(input.id);
+    }
+  }
+  const newDescription = [colors, sizes, categories, e.target[2].value];
   const newProduct = new product(
     e.target[0].value,
     e.target[1].value,
-    e.target[2].value
+    newDescription,
+    image_url
   );
-  newProduct.createProduct(tempjwt);
+
+  /* newProduct.concatDescription();
+  newProduct.createProduct(tempjwt); */
 }
 
 function getImageObject(listofObjects) {

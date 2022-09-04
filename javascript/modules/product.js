@@ -1,23 +1,17 @@
 import { postProduct } from "./apiCalls.js";
 
 export class product {
-  constructor(title, price, description) {
+  constructor(title, price, description, image_url) {
     (this.title = title),
       (this.price = price),
-      (this.description = description); /* {
-        shortDescription,
-        spesifications,
-        sizes,
-        colors,
-        images,
-      }) */
+      (this.description = description),
+      (this.image_url = image_url);
   }
   createProductPage(location) {
     let colorsHtml = "";
-    this.colors.forEach((color) => {
-      console.log(color);
+    /*  this.colors.forEach((color) => {
       colorsHtml += `<div class="circle bg-${color}"></div>`;
-    });
+    }); */
 
     const html = `<section class="row mt-3 bg-white">
     <div class="col-5 offset-2 row">
@@ -80,7 +74,6 @@ export class product {
   </div>`;
   }
   createProduct(jwt) {
-    console.log(this);
     postProduct(this, jwt);
   }
   concatDescription() {
@@ -89,12 +82,16 @@ export class product {
       return;
     } else {
       let string = "";
-      console.log(this.description);
+
       this.description.forEach((list) => {
-        string += list.join(",") + ":";
+        if (typeof list == []) {
+          string += list.join(",");
+        } else {
+          string += list;
+        }
+        string += ":";
       });
       this.description = string;
-      console.log(this.description);
     }
   }
   parseDescription() {
@@ -107,10 +104,40 @@ export class product {
         descriptionMatrix.push(list);
       });
       this.description = descriptionMatrix;
-      console.log(this.description);
     } else {
       console.log("error");
       return;
     }
+  }
+  makeDescriptionObject() {
+    const color = this.description[0];
+    const size = this.description[1];
+    const category = this.description[2];
+    const longDescription = this.description[3];
+    this.description = {
+      colors: color,
+      sizes: size,
+      categories: category,
+      longDescription: longDescription,
+    };
+  }
+  makeDescriptionString() {
+    let newDescription = "";
+    const color = this.description.colors;
+    const size = this.description.sizes;
+    const shortDescription = this.description.shortDescription;
+    const longDescription = this.description.longDescription;
+    color.forEach((color) => {
+      newDescription += color + ",";
+    });
+    newDescription += ":";
+    size.forEach((size) => {
+      newDescription += size + ",";
+    });
+    newDescription += ":" + shortDescription + ":" + longDescription;
+    this.description = newDescription;
+  }
+  makeImagesString() {
+    console.log(this.image_url);
   }
 }
