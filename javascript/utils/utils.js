@@ -1,12 +1,14 @@
-let filesToUpload = [];
-export function imagePreview(e, container) {
-  container.innerHTML = "";
-  for (let i = 0; i < e.target.files.length; i++) {
-    filesToUpload.push(e.target.files[i]);
+import { user } from "../modules/user.js";
+
+export function imagePreview(images) {
+  let imgElement = "";
+
+  for (let i = 0; i < images.length; i++) {
+    imgElement += `<img src="${images[i].formats.small.url}" class"preview-img"/>`;
   }
-  filesToUpload.forEach((file) => {
-    const previewObject = URL.createObjectURL(file);
-    container.innerHTML += `<img src="${previewObject}"class="preview_img">`;
-  });
-  return filesToUpload;
+
+  return imgElement;
+}
+export function getLocalUser() {
+  return JSON.parse(localStorage.getItem("user"));
 }

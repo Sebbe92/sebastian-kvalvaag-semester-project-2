@@ -1,6 +1,6 @@
-const productURL = "https://itsuitesyou.herokuapp.com/products";
-const uploadURL = "https://itsuitesyou.herokuapp.com/upload";
-const filesURL = "https://itsuitesyou.herokuapp.com/upload/files";
+const productURL = "https://it-suites-you.herokuapp.com/products";
+const uploadURL = "https://it-suites-you.herokuapp.com/upload";
+const filesURL = "https://it-suites-you.herokuapp.com/upload/files";
 export async function getJWT(apiUrl, userName, password) {
   try {
     const response = await fetch(apiUrl, {
@@ -15,7 +15,7 @@ export async function getJWT(apiUrl, userName, password) {
       }),
     });
     const result = await response.json();
-
+    console.log(result);
     return result.jwt;
   } catch (error) {
     console.error(error);
@@ -51,11 +51,11 @@ export async function postProduct(product, jwt) {
     console.error(error);
   }
 }
-export async function uploadImg(form, jwt) {
+export async function uploadImg(formData, jwt) {
   try {
-    const result = await fetch("https://itsuitesyou.herokuapp.com/upload", {
-      method: "post",
-      body: new FormData(form),
+    const result = await fetch(uploadURL, {
+      method: "POST",
+      body: formData,
     });
     const response = await result.json();
     console.log(response);

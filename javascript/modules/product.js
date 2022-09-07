@@ -1,63 +1,80 @@
-import { postProduct } from "./apiCalls.js";
+import { GetImgById, postProduct } from "./apiCalls.js";
 
 export class product {
-  constructor(title, price, description, image_url) {
+  constructor(title, price, description, colors, sizes, specs, imageIds) {
     (this.title = title),
       (this.price = price),
       (this.description = description),
-      (this.image_url = image_url);
+      (this.color = colors),
+      (this.size = sizes),
+      (this.specs = specs),
+      (this.image_url = imageIds);
+    this.images = [];
+  }
+  async getImageDetails() {
+    for (let i = 0; i < this.image_url.length; i++) {
+      this.images.push(await GetImgById(this.image_url[i]));
+    }
   }
   createProductPage(location) {
+    let categoriesHtml = "";
     let colorsHtml = "";
-    /*  this.colors.forEach((color) => {
+    let sizesHtml = "";
+    this.color.forEach((color) => {
       colorsHtml += `<div class="circle bg-${color}"></div>`;
-    }); */
-
+    });
+    this.size.forEach((size) => {
+      sizesHtml += `<li>${size}</li>`;
+    });
+    this.specs.forEach((category) => {
+      categoriesHtml += `<li>${category}</li>`;
+    });
     const html = `<section class="row mt-3 bg-white">
-    <div class="col-5 offset-2 row">
+    <div class="col-md-7 col-sm-12  row">
       <div class="col-9 big-img">
         <img
-          src="${this.images[0].large.url}"
-          alt="${this.images[0].alt}"
+          src="${this.images[0].formats.large.url}"
+          alt="${this.description}"
         />
       </div>
-      <div class="col-3 d-flex flex-column bg-danger justify-content-around">
-        <div class="small-img row-cols-4">
+      <div class="col-3 d-flex flex-column justify-content-between">
+        <div class="small-img ">
           <img
-            src="${this.img[1].src}"
-            alt="${this.img[1].alt}"
+          src="${this.images[1].formats.large.url}"
+          alt="${this.description}"
           />
         </div>
-        <div class="small-img row-cols-4">
+        <div class="small-img ">
           <img
-            src="${this.img[2].src}"
-            alt="${this.img[2].alt}"
+          src="${this.images[1].formats.large.url}"
+          alt="${this.description}"
           />
         </div>
-        <div class="small-img row-cols-4">
+        <div class="small-img">
           <img
-            src="${this.img[3].src}"
-            alt="${this.img[3].alt}"
+          src="${this.images[1].formats.large.url}"
+          alt="${this.description}"
           />
         </div>
       </div>
     </div>
-    <div class="col-3 d-flex flex-column">
+    <div class="col-md-3 col-sm-12 d-flex flex-column">
       <h1>${this.title}</h1>
       <div>
-        <h4>Product info:</h4>
         <p>${this.description}</p>
       </div>
+      <ul>
+      ${categoriesHtml}
+      </ul>
       <div class="d-flex gap-2">
-        
         ${colorsHtml}
       </div>
-      <div class="dropdown">hdfh</div>
-      <div><p class="category-tag">Outfit</p></div>
-      <button class="mt-auto">Buy Now</button>
+      <ul>
+      ${sizesHtml}
+      </ul>
+      <button class="mt-auto buy-now-btn">Buy Now</button>
     </div>
   </section>
-  <section class="bg-white contanier-fluid">asdasd</section>
   `;
     location.innerHTML = html;
   }
@@ -73,71 +90,20 @@ export class product {
     </div>
   </div>`;
   }
-  createProduct(jwt) {
+  publishProduct() {
+    const jwt = JSON.parse(localStorage.getItem("user")).jwt;
     postProduct(this, jwt);
   }
-  concatDescription() {
-    if (typeof this.description == "string") {
-      console.log("already a string");
-      return;
-    } else {
-      let string = "";
-
-      this.description.forEach((list) => {
-        if (typeof list == []) {
-          string += list.join(",");
-        } else {
-          string += list;
-        }
-        string += ":";
-      });
-      this.description = string;
-    }
+  parseLists() {
+    this.color = this.color.split(",");
+    this.size = this.size.split(",");
+    this.specs = this.specs.split(",");
+    this.image_url = this.image_url.split(",");
   }
-  parseDescription() {
-    if (typeof this.description == "string") {
-      const descriptionList = this.description.split(":");
-      let descriptionMatrix = [];
-      descriptionList.forEach((item) => {
-        const list = item.split(",");
-
-        descriptionMatrix.push(list);
-      });
-      this.description = descriptionMatrix;
-    } else {
-      console.log("error");
-      return;
-    }
-  }
-  makeDescriptionObject() {
-    const color = this.description[0];
-    const size = this.description[1];
-    const category = this.description[2];
-    const longDescription = this.description[3];
-    this.description = {
-      colors: color,
-      sizes: size,
-      categories: category,
-      longDescription: longDescription,
-    };
-  }
-  makeDescriptionString() {
-    let newDescription = "";
-    const color = this.description.colors;
-    const size = this.description.sizes;
-    const shortDescription = this.description.shortDescription;
-    const longDescription = this.description.longDescription;
-    color.forEach((color) => {
-      newDescription += color + ",";
-    });
-    newDescription += ":";
-    size.forEach((size) => {
-      newDescription += size + ",";
-    });
-    newDescription += ":" + shortDescription + ":" + longDescription;
-    this.description = newDescription;
-  }
-  makeImagesString() {
-    console.log(this.image_url);
+  stringifyLists() {
+    this.color = this.color.join(",");
+    this.size = this.size.join(",");
+    this.specs = this.specs.join(",");
+    this.image_url = this.image_url.join(",");
   }
 }

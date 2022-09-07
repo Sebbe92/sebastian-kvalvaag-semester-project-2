@@ -1,68 +1,56 @@
-.file_container 
-  height: 160px
-  position: relative
 
-.drag-n-drop 
-  color: transparent
-
-.drag-n-drop::-webkit-file-upload-button 
-  visibility: hidden
-
-.drag-n-drop::after 
-  width: 100%
-  height: 100%
-  position: absolute
-  top: 0
-  left: 0
-  display: inline-block
-  border: solid black 3px
-  content: "drag and drop \a or click here to add files"
-  color: black
-  text-align: center
-  padding-top: 45px
-  vertical-align: middle
-
-
-
-.preview_img
-  width: 25%
-
+.preview-img
+  width: 100px
 
 
 .dropdown_button
-  border: none
+  
+  padding: 10px, 5px
+  border: 2px solid black
+  height: 30px
   &:hover
     cursor: pointer
 
 .dropdown 
-  border: 2px solid black
+  position: relative
+  
   width: fit-content
-  padding: 5px 2px
   .dropdown_list
+    position: absolute
+    left: 0px
+    top: 30px
+    width: 100%
+    background-color: #a4a4a4
+    border: 2px solid black
+    border-radius: 2px
+    
     display: none
     list-style: none
-    
-    opacity: 0
-    transition: opacity 200 ease-out 200
+    transform: rotateX(90deg)
+    transition: rotateX 2000ms
+    padding: 5px 2px
     
      
   .active 
+    z-index: 1000
     display: flex
     flex-direction: column
-    align-items: flex-start
-    padding: 2px 2px
-    opacity: 1
-    
+    transform: rotateX(0deg)
 
     li
       width: 100% 
       cursor: pointer
+      margin: 0
       margin-top: 4px
+      display: flex
+      justify-content: start
+      padding-left: 2px 
       &:hover
         background-color: #0d80f4
-        
     label
-      padding: auto 0
+      cursor: pointer
+      margin-left: 5px 
+      
       
       
       
