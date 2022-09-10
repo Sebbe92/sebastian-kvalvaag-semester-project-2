@@ -1,4 +1,5 @@
 import { GetImgById, postProduct } from "./apiCalls.js";
+import { makeDropdownHtml } from "./forms.js";
 
 export class product {
   constructor(title, price, description, colors, sizes, specs, imageIds) {
@@ -23,9 +24,9 @@ export class product {
     this.color.forEach((color) => {
       colorsHtml += `<div class="circle bg-${color}"></div>`;
     });
-    this.size.forEach((size) => {
-      sizesHtml += `<li>${size}</li>`;
-    });
+
+    sizesHtml = makeDropdownHtml("Size", this.size, "radio");
+    console.log(sizesHtml);
     this.specs.forEach((category) => {
       categoriesHtml += `<li>${category}</li>`;
     });
@@ -69,9 +70,7 @@ export class product {
       <div class="d-flex gap-2">
         ${colorsHtml}
       </div>
-      <ul>
       ${sizesHtml}
-      </ul>
       <button class="mt-auto buy-now-btn">Buy Now</button>
     </div>
   </section>

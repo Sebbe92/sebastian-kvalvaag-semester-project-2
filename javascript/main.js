@@ -2,7 +2,11 @@ import { getProduct, postProduct, uploadImg } from "./modules/apiCalls.js";
 import { loginFormSetup } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
-import { makeForm } from "./modules/forms.js";
+import {
+  makeForm,
+  makeDropdownHtml,
+  addDropdownListeners,
+} from "./modules/forms.js";
 import { getLocalUser, imagePreview } from "./utils/utils.js";
 import {
   productFormContainer,
@@ -12,6 +16,43 @@ import {
   productContainer,
   currentUser,
 } from "./utils/constants.js";
+import { insertCarousel } from "./modules/carousel.js";
+
+const navBarContainer = document.querySelector("#navbarSupportedContent");
+
+const navBarBtn = document.querySelector("nav .navbar-toggler");
+
+const main = document.querySelector("main");
+
+if (window.innerWidth <= 1001) {
+  navBarContainer.style.transform = "translateY(-200px)";
+  navBarBtn.removeEventListener("click", handleNavDropdown);
+  navBarBtn.addEventListener("click", handleNavDropdown);
+} else {
+  navBarContainer.style.transform = "translateY(0)";
+}
+window.addEventListener("resize", () => {
+  if (window.innerWidth <= 1001) {
+    navBarContainer.style.transform = "translateY(-200px)";
+    navBarBtn.removeEventListener("click", handleNavDropdown);
+    navBarBtn.addEventListener("click", handleNavDropdown);
+  } else {
+    navBarContainer.style.transform = "translateY(0)";
+    main.removeEventListener("pointerenter", handleClose);
+  }
+});
+function handleNavDropdown(e) {
+  if (e.path[2].children[2].style.transform == "translateY(50px)") {
+    e.path[2].children[2].style.transform = "translateY(-200px)";
+  } else {
+    e.path[2].children[2].style.transform = "translateY(50px)";
+    main.addEventListener("pointerenter", handleClose);
+  }
+}
+function handleClose(e) {
+  console.log(e.path[2].children[2].style.transform);
+  navBarContainer.style.transform = "translateY(-200px)";
+}
 let currentProduct = {};
 if (productFormContainer) {
   makeForm(productFormContainer);
@@ -19,9 +60,10 @@ if (productFormContainer) {
 const productPreviewContainer = document.querySelector(
   "#product-preview_container"
 );
+const colors = ["red", "green"];
 
 if (productContainer) {
-  /* getProduct(7).then((productObject) => {
+  getProduct(4).then((productObject) => {
     currentProduct = new product(
       productObject.title,
       productObject.price,
@@ -31,15 +73,15 @@ if (productContainer) {
       productObject.specs,
       productObject.image_url
     );
+    console.log(currentProduct);
     currentProduct.parseLists();
     currentProduct.getImageDetails().then(() => {
       currentProduct.createProductPage(productContainer);
       console.log(currentProduct);
     });
-  }); */
+  });
 }
 
-console.log(JSON.parse(localStorage.getItem("user")));
 if (loginForm) {
   loginFormSetup(loginForm);
 }
@@ -60,3 +102,5 @@ function getImageObject(listofObjects) {
   });
   return imgObjects;
 }
+
+const testFont = document.querySelector("#testFont");
