@@ -4,7 +4,13 @@ import { getJWT, uploadImg, deleteImg } from "./apiCalls.js";
 import { product } from "./product.js";
 
 const productColors = ["red", "green", "blue", "gray", "black", "white"];
-const productCategories = ["full-suite", "shirt", "pants", "jackets"];
+export const productCategories = [
+  "full-suit",
+  "shirts",
+  "pants",
+  "jackets",
+  "accessories",
+];
 const productSizes = ["xl", "l", "m", "s"];
 
 let uploadedFiles = [];
@@ -161,7 +167,7 @@ async function makeProductFromForm(e, images) {
   const colors = [];
   const sizes = [];
   const categories = [];
-  if (images.length > 2) {
+  if (images.length >= 4) {
     images.forEach((img) => {
       imgIds.push(img.id);
     });
@@ -171,7 +177,6 @@ async function makeProductFromForm(e, images) {
   }
 
   for (let i = 0; i < e.target.length; i++) {
-    console.log(e.target[i].name);
     if (e.target[i].name == "Colors" && e.target[i].checked) {
       colors.push(e.target[i].id);
     }
@@ -182,6 +187,14 @@ async function makeProductFromForm(e, images) {
       categories.push(e.target[i].id);
     }
   }
+  if (!colors.length || !sizes.length || !categories.length) {
+    console.log("product needs atleast 1 color 1 size and 1 category");
+    return;
+  }
+  if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
+    console.log("product needs a title, price and description");
+    return;
+  }
   const newProduct = new product(
     e.target[0].value,
     e.target[1].value,
@@ -191,7 +204,7 @@ async function makeProductFromForm(e, images) {
     categories,
     imgIds
   );
-  const displayContainer = document.querySelector("#product_container");
+  const displayContainer = document.querySelector("#product_container_dialog");
 
   newProduct.getImageDetails().then(() => {
     newProduct.createProductPage(displayContainer);
@@ -203,7 +216,9 @@ async function makeProductFromForm(e, images) {
     publishBtn.addEventListener("click", (e) => {
       e.preventDefault();
       newProduct.stringifyLists();
-      newProduct.publishProduct();
+      newProduct.publishProduct().then(() => {
+        clearForm();
+      });
     });
     cancelBtn.addEventListener("click", (e) => {
       displayContainer.innerHTML = "";

@@ -2,7 +2,16 @@ import { GetImgById, postProduct } from "./apiCalls.js";
 import { makeDropdownHtml } from "./forms.js";
 
 export class product {
-  constructor(title, price, description, colors, sizes, specs, imageIds) {
+  constructor(
+    title,
+    price,
+    description,
+    colors,
+    sizes,
+    specs,
+    imageIds,
+    id = ""
+  ) {
     (this.title = title),
       (this.price = price),
       (this.description = description),
@@ -10,20 +19,29 @@ export class product {
       (this.size = sizes),
       (this.specs = specs),
       (this.image_url = imageIds);
+    this.id = id;
     this.images = [];
   }
   async getImageDetails() {
-    for (let i = 0; i < this.image_url.length; i++) {
-      this.images.push(await GetImgById(this.image_url[i]));
+    if (this.image_url) {
+      for (let i = 0; i < this.image_url.length; i++) {
+        this.images.push(await GetImgById(this.image_url[i]));
+      }
     }
   }
-  createProductPage(location) {
-    let categoriesHtml = "";
+  createColorsHtml() {
+    console.log(this);
     let colorsHtml = "";
-    let sizesHtml = "";
     this.color.forEach((color) => {
       colorsHtml += `<div class="circle bg-${color}"></div>`;
     });
+    console.log(colorsHtml);
+    return colorsHtml;
+  }
+  createProductPage(location) {
+    let categoriesHtml = "";
+    const colorsHtml = this.createColorsHtml();
+    let sizesHtml = "";
 
     sizesHtml = makeDropdownHtml("Size", this.size, "radio");
     console.log(sizesHtml);
@@ -34,26 +52,26 @@ export class product {
     <div class="col-md-7 col-sm-12  row">
       <div class="col-9 big-img">
         <img
-          src="${this.images[0].formats.large.url}"
+          src="${this.images[0].formats.thumbnail.url}"
           alt="${this.description}"
         />
       </div>
       <div class="col-3 d-flex flex-column justify-content-between">
         <div class="small-img ">
           <img
-          src="${this.images[1].formats.large.url}"
+          src="${this.images[1].formats.thumbnail.url}"
           alt="${this.description}"
           />
         </div>
         <div class="small-img ">
           <img
-          src="${this.images[1].formats.large.url}"
+          src="${this.images[2].formats.thumbnail.url}"
           alt="${this.description}"
           />
         </div>
         <div class="small-img">
           <img
-          src="${this.images[1].formats.large.url}"
+          src="${this.images[3].formats.thumbnail.url}"
           alt="${this.description}"
           />
         </div>
@@ -77,16 +95,38 @@ export class product {
   `;
     location.innerHTML = html;
   }
-  makeProductCard() {
-    return `<div class="card m-auto mt-5" style="width: 72%">
-    <img src="..." class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title">${this.title}</h5>
-      <p class="card-text">
-        ${this.description}
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
+  makeProductCard(container) {
+    let colorsHtml = "";
+    if (this.color) {
+      colorsHtml = this.createColorsHtml();
+    }
+
+    let imageUrl = "#";
+    if (this.images[0]) {
+      imageUrl = this.images[0].formats.thumbnail.url;
+    }
+    container.innerHTML += `<div class="card col mt-3">
+    <a href="product-page.html?id=${this.id}" class="product-link">
+    <img
+    src="${imageUrl}"
+    alt="${this.description}"
+    class="w-100"
+  />
+      <div class="card-body p-1 pt-2 position-relative" style={z-index:"-1"}>
+        <h5 class="card-title w-75">${this.title}</h5>
+        <p
+          class="card-text m-0 mt-auto position-absolute top-0 end-0 pt-1"
+        >
+          ${this.price} Nok
+        </p></a>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex gap-2">
+            ${colorsHtml}
+          </div>
+          <a href="#" class="btn btn-success fs-6 add-to-cart-btn" id="${this.id}" >Add To Cart</a>
+        </div>
+      </div>
+    
   </div>`;
   }
   publishProduct() {
@@ -94,10 +134,18 @@ export class product {
     postProduct(this, jwt);
   }
   parseLists() {
-    this.color = this.color.split(",");
-    this.size = this.size.split(",");
-    this.specs = this.specs.split(",");
-    this.image_url = this.image_url.split(",");
+    if (this.color) {
+      this.color = this.color.split(",");
+    }
+    if (this.size) {
+      this.size = this.size.split(",");
+    }
+    if (this.specs) {
+      this.specs = this.specs.split(",");
+    }
+    if (this.image_url) {
+      this.image_url = this.image_url.split(",");
+    }
   }
   stringifyLists() {
     this.color = this.color.join(",");

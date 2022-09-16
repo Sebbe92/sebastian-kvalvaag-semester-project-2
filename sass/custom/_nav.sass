@@ -1,24 +1,59 @@
 nav
   position: relative
+     
 
+.navbar-toggler
+  &:hover,&:focus
+    box-shadow: inset 0px 0px 1px 1px #11111181
 
 #navbarSupportedContent
-  z-index: -1
   position: absolute
   top: 0
   left: 0
-  transition: all 200ms ease-out
-  transform: translateY(-220px)
+  transition: all 250ms ease-out
   width: 100%
+  z-index: -10
+#shopping-cart_button
 
+#shopping-cart_container
+  position: absolute
+  z-index: -9
+  background-color: #fff
+  height: fit-content
+  width: fit-content
+  margin: 0
+  margin-left: auto
+  margin-top: 77px
+  transform: translateY(-100vh)
+  overflow: hidden
+  transition: transform 200ms ease-in
+  &.open
+    transform: translateY(0px)
 
-@media (min-width:1000px) 
+@media (min-width:1001px) 
   #navbarSupportedContent
-    z-index: 1
     position: relative
     width: 75%
  
 
-    
+//sec-nav
+
+.category-btn_sec-nav
+  height: fit-content
+  margin-top: 5px
+  text-decoration: none
+  border: 2px solid #ffffff
+  background-color: #0026328a
+  color: #ffffff
+  padding: 2px 10px
+  border-radius: 50vh
+  transition: background-color 200ms ease-in
+  &.active
+    background-color: $white
+    color: #000000
+  &:hover
+    background-color: $white
+    color: #000000
+
 
   

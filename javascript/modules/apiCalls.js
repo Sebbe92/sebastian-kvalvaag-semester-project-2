@@ -32,6 +32,16 @@ export async function getProduct(id) {
     console.error(error);
   }
 }
+export async function getProducts(filter) {
+  try {
+    const response = await fetch(productURL + filter);
+    const result = await response.json();
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export async function postProduct(product, jwt) {
   try {

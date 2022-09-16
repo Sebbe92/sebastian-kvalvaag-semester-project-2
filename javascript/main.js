@@ -1,4 +1,9 @@
-import { getProduct, postProduct, uploadImg } from "./modules/apiCalls.js";
+import {
+  getProduct,
+  getProducts,
+  postProduct,
+  uploadImg,
+} from "./modules/apiCalls.js";
 import { loginFormSetup } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
@@ -6,6 +11,7 @@ import {
   makeForm,
   makeDropdownHtml,
   addDropdownListeners,
+  productCategories,
 } from "./modules/forms.js";
 import { getLocalUser, imagePreview } from "./utils/utils.js";
 import {
@@ -15,54 +21,57 @@ import {
   dropdown,
   productContainer,
   currentUser,
+  snapScrollContainer,
+  cartBtn,
+  categoriesListContainer,
+  navBarContainer,
+  cartContainer,
+  productsOutput,
 } from "./utils/constants.js";
-import { insertCarousel } from "./modules/carousel.js";
+import { navBarSetup } from "./modules/nav.js";
 
-const navBarContainer = document.querySelector("#navbarSupportedContent");
-
-const navBarBtn = document.querySelector("nav .navbar-toggler");
-
-const main = document.querySelector("main");
-
-if (window.innerWidth <= 1001) {
-  navBarContainer.style.transform = "translateY(-200px)";
-  navBarBtn.removeEventListener("click", handleNavDropdown);
-  navBarBtn.addEventListener("click", handleNavDropdown);
-} else {
-  navBarContainer.style.transform = "translateY(0)";
-}
-window.addEventListener("resize", () => {
-  if (window.innerWidth <= 1001) {
-    navBarContainer.style.transform = "translateY(-200px)";
-    navBarBtn.removeEventListener("click", handleNavDropdown);
-    navBarBtn.addEventListener("click", handleNavDropdown);
-  } else {
-    navBarContainer.style.transform = "translateY(0)";
-    main.removeEventListener("pointerenter", handleClose);
-  }
-});
-function handleNavDropdown(e) {
-  if (e.path[2].children[2].style.transform == "translateY(50px)") {
-    e.path[2].children[2].style.transform = "translateY(-200px)";
-  } else {
-    e.path[2].children[2].style.transform = "translateY(50px)";
-    main.addEventListener("pointerenter", handleClose);
+if (cartBtn) {
+  if (cartContainer) {
+    cartBtn.addEventListener("click", () => {
+      cartContainer.classList.toggle("open");
+    });
   }
 }
-function handleClose(e) {
-  console.log(e.path[2].children[2].style.transform);
-  navBarContainer.style.transform = "translateY(-200px)";
+console.log(snapScrollContainer);
+if (snapScrollContainer) {
+  snapScrollContainer.addEventListener("scroll", (e) => {
+    if (snapScrollContainer.scrollTop >= window.innerHeight) {
+      snapScrollContainer.style.scrollSnapType = "none";
+    } else {
+      snapScrollContainer.style.scrollSnapType = "y mandatory";
+    }
+  });
 }
+if (categoriesListContainer) {
+  makeCategoriesListElement(productCategories, categoriesListContainer);
+}
+export function makeCategoriesListElement(list, container) {
+  list.forEach((category) => {
+    container.innerHTML += `<a href="products.html" class="col">
+    <li class="rounded-3 text-white" id="${category}-category-img">
+      <h3>${category}</h3>
+    </li></a
+  >`;
+  });
+}
+if (loginForm) {
+  loginFormSetup(loginForm);
+}
+
+window.addEventListener("resize", navBarSetup);
+navBarSetup();
 let currentProduct = {};
+const currentProducts = [];
 if (productFormContainer) {
   makeForm(productFormContainer);
 }
-const productPreviewContainer = document.querySelector(
-  "#product-preview_container"
-);
-const colors = ["red", "green"];
 
-if (productContainer) {
+/* if (productContainer) {
   getProduct(4).then((productObject) => {
     currentProduct = new product(
       productObject.title,
@@ -80,27 +89,33 @@ if (productContainer) {
       console.log(currentProduct);
     });
   });
-}
+} */
 
-if (loginForm) {
-  loginFormSetup(loginForm);
-}
-getLocalUser();
-const tempjwt =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjYxOTE0MDQ1LCJleHAiOjE2NjQ1MDYwNDV9.MTPzWqPRUKqvZXrd9c2aH_VpslKlMSHRWQayPurU0TI";
-
-async function pushFilesToUpload(fileEvents) {
-  fileEvents.forEach(async (fileEvent) => {
-    console.log(await uploadImg(fileEvent.path[2], tempjwt));
+function makeProducts(list, container) {
+  list.forEach((item) => {
+    currentProducts.push(
+      new product(
+        item.title,
+        item.price,
+        item.description,
+        item.color,
+        item.size,
+        item.specs,
+        item.image_url,
+        item.id
+      )
+    );
+  });
+  currentProducts.forEach((item) => {
+    item.parseLists();
+    item.getImageDetails().then(() => {
+      console.log(item);
+      item.makeProductCard(container);
+    });
   });
 }
-
-function getImageObject(listofObjects) {
-  const imgObjects = [];
-  listofObjects.forEach((object) => {
-    imgObjects.push(object.formats);
+if (productsOutput) {
+  getProducts("").then((list) => {
+    makeProducts(list, productsOutput);
   });
-  return imgObjects;
 }
-
-const testFont = document.querySelector("#testFont");

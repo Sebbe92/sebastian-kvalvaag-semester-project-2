@@ -1,17 +1,18 @@
 .btn-font-small
+  opacity: 1
   font-weight: 300
   transition: opacity 200ms ease-in
-  padding: 2px 7px
-  font-size: 5em
+  
 
 .btn-font-big
   opacity: 0
   font-weight: 700 
   transition: opacity 200ms ease-in
-  padding: 2px 7px  
-  font-size: 5em
+  
 
 .test-btn
+  width: fit-content
+  margin: 0 auto
   cursor: pointer
   &:hover 
     .btn-font-big
@@ -67,4 +68,6 @@
       cursor: pointer
       margin-left: 5px 
       
-      
+.add-to-cart-btn
+  &:hover
+    content: "+"      
