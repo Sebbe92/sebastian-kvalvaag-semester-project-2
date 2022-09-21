@@ -24,7 +24,7 @@ export async function getJWT(apiUrl, userName, password) {
 
 export async function getProduct(id) {
   try {
-    const response = await fetch(productURL + `/${id}`);
+    const response = await fetch(`${productURL}/${id}`);
     const result = await response.json();
 
     return result;
@@ -32,9 +32,9 @@ export async function getProduct(id) {
     console.error(error);
   }
 }
-export async function getProducts(filter) {
+export async function getProducts(params) {
   try {
-    const response = await fetch(productURL + filter);
+    const response = await fetch(`${productURL}?${params}`);
     const result = await response.json();
 
     return result;

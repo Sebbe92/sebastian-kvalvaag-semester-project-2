@@ -2,6 +2,7 @@ export const body = document.querySelector("body");
 export const productFormContainer = document.querySelector(
   "#product-form_container"
 );
+export const main = document.querySelector("main");
 
 export const loginForm = document.querySelector("#login_form");
 export const dropdown = document.querySelectorAll(".dropdown-toggle");
@@ -26,3 +27,7 @@ export const productPreviewContainer = document.querySelector(
   "#product-preview_container"
 );
 export const productsOutput = document.querySelector("#products-output");
+
+export const shoppingCartContainer = document.querySelector(
+  "#added-products-container"
+);

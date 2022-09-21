@@ -1,3 +1,7 @@
+header
+  z-index: 99999
+   
+  
 nav
   position: relative
      
@@ -13,22 +17,32 @@ nav
   transition: all 250ms ease-out
   width: 100%
   z-index: -10
-#shopping-cart_button
 
 #shopping-cart_container
+  visibility: hidden
+  overflow-x: hidden
+  display: flex
+  flex-direction: column
   position: absolute
   z-index: -9
-  background-color: #fff
+  background-color: $white
   height: fit-content
   width: fit-content
   margin: 0
   margin-left: auto
   margin-top: 77px
-  transform: translateY(-100vh)
-  overflow: hidden
-  transition: transform 200ms ease-in
+  opacity: 0
+  transition: opacity 200ms ease-out
   &.open
-    transform: translateY(0px)
+    visibility: visible
+    opacity: 1
+    
+@keyframes slideinfromright
+  10% 
+    transform: translateX(100vw)
+  100%
+    transform: translateX(0)
+  
 
 @media (min-width:1001px) 
   #navbarSupportedContent

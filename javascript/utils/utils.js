@@ -24,3 +24,27 @@ export function getLocalUser() {
 export function userMessage(message) {
   console.log(message);
 }
+
+export function addToShoppingCart(item) {
+  if (!localStorage.getItem("shoppingcart")) {
+    localStorage.setItem("shoppingcart", JSON.stringify([]));
+  }
+  const currentCart = JSON.parse(localStorage.getItem("shoppingcart"));
+  currentCart.push(item);
+  localStorage.setItem("shoppingcart", JSON.stringify(currentCart));
+}
+export function removeFromShoppingCart(id) {
+  if (!localStorage.getItem("shoppingcart")) {
+    alert("empty shopping cart");
+  }
+  const currentCart = JSON.parse(localStorage.getItem("shoppingcart"));
+
+  currentCart.splice(id, 1);
+  console.log(
+    currentCart,
+    currentCart.filter((item) => {
+      return item.id == id;
+    })
+  );
+  localStorage.setItem("shoppingcart", JSON.stringify(currentCart));
+}

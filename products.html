@@ -91,13 +91,18 @@
               </li>
             </ul>
           </div>
-          <button id="shopping-cart_button">Cart</button>
+          <button id="shopping-cart_button" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
+              <path
+                d="M14.35 43.95q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55-1.05 1.05-2.55 1.05Zm20 0q-1.5 0-2.55-1.05-1.05-1.05-1.05-2.55 0-1.5 1.05-2.55 1.05-1.05 2.55-1.05 1.5 0 2.55 1.05 1.05 1.05 1.05 2.55 0 1.5-1.05 2.55-1.05 1.05-2.55 1.05Zm-22.6-33 5.5 11.4h14.4l6.25-11.4Zm-1.5-3H39.7q1.15 0 1.75 1.05.6 1.05 0 2.1L34.7 23.25q-.55.95-1.425 1.525t-1.925.575H16.2l-2.8 5.2h24.55v3h-24.1q-2.1 0-3.025-1.4-.925-1.4.025-3.15l3.2-5.9L6.45 7h-3.9V4H8.4Zm7 14.4h14.4Z"
+              />
+            </svg>
+          </button>
           <div
             id="shopping-cart_container"
-            class="position-absolute top-0 end-0 d-flex flex-column">
-            <ul class="added-products">
-              <li class="d-flex justify-content-between my-2"><a href="/product-page.html?id=${this.id}" class="d-flex me-5"><div class="circle overflow-hidden me-3"><img src="../img/full-suit-pexels-deepak-verma-1096849.jpg" alt="" class="w-100"></div><h5 class="my-auto fs-5">Product title</h5></a><p class="my-auto me-2">999 Nok</p> <button class="btn">X</button></li> 
-            </ul>
+            class="position-absolute top-0 end-0"
+          >
+            <ul class="added-products" id="added-products-container"></ul>
             <p id="cost-of-all-items" class="text-end">Tot: 999 Nok</p>
             <button id="checkout">Go To Checkout</button>
             <button id="cancel">Continue Shopping</button>
@@ -105,27 +110,32 @@
         </div>
       </nav>
     </header>
-    <main class="">
-      <section class="categories_sec-nav bg-primary py-3 container-fluid row">
-        <div class="d-flex justify-content-around align-items-center flex-wrap col-12 col-md-7">
-          <a href="#" class="category-btn_sec-nav active">All</a>
-          <a href="#" class="category-btn_sec-nav">Full Suit</a
-          ><a href="#" class="category-btn_sec-nav">Shirts</a>
-          <a href="#" class="category-btn_sec-nav">Pants</a>
-          <a href="#" class="category-btn_sec-nav">Jackets</a>
-          <a href="#" class="category-btn_sec-nav">Accessories</a>
+    <main class="position-relative">
+      <dialog closed class="centered-modal" id="full-img-modal"></dialog>
+      <section class="categories_sec-nav bg-primary m-0 container-fluid row">
+        <div
+          class="d-flex justify-content-around align-items-center flex-wrap col-12 col-md-7"
+        >
+          <a href="#" class="category-btn_sec-nav active" id="">All</a>
+          <a href="#" class="category-btn_sec-nav" id="full-suit">Full Suit</a
+          ><a href="#" class="category-btn_sec-nav" id="shirts">Shirts</a>
+          <a href="#" class="category-btn_sec-nav" id="pants">Pants</a>
+          <a href="#" class="category-btn_sec-nav" id="jackets">Jackets</a>
+          <a href="#" class="category-btn_sec-nav" id="accessories"
+            >Accessories</a
+          >
         </div>
-        <form class="d-flex justify-content-center m-3 col-12 col-md-4" role="search">
+        <form
+          class="d-flex justify-content-center my-3 col-12 col-md-4"
+          role="search"
+        >
           <input
             class="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-          <button
-            class="btn btn-outline-info text-white"
-            type="submit"
-          >
+          <button class="btn btn-outline-info text-white" type="submit">
             Search
           </button>
         </form>
@@ -135,269 +145,7 @@
         class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 justify-content-center m-0"
         dir="ltr"
       >
-        <div class="card col mt-3">
-          <a href="product-page.html?id=${id}" class="product-link">
-            <img
-              src="../img/accessories-pexels-lumn-167686.jpg"
-              alt=""
-              class="w-100"
-            />
-            <div class="card-body p-1 pt-2 position-relative">
-              <h5 class="card-title w-75">Card title</h5>
-              <p
-                class="card-text m-0 mt-auto position-absolute top-0 end-0 pt-1"
-              >
-                999 Nok
-              </p></a>
-              <div class="d-flex justify-content-between">
-                <div class="d-flex gap-2">
-                  <p class="circle bg-danger"></p>
-                  <p class="circle bg-black"></p>
-                  <p class="circle bg-white"></p>
-                </div>
-                <a href="#" class="btn btn-success fs-6 add-to-cart-btn" >Add To Cart</a>
-              </div>
-            </div>
-          
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto pt-5">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
-        <div class="card col mt-3">
-          <img
-            src="../img/accessories-pexels-lumn-167686.jpg"
-            alt=""
-            class="w-100"
-          />
-          <div class="card-body p-1 pt-2">
-            <h5 class="card-title">Card title</h5>
-            <div class="d-flex justify-content-between">
-              <a href="#" class="btn btn-success fs-6">Add To Cart</a>
-              <p class="card-text m-0 mt-auto">999 Nok</p>
-            </div>
-          </div>
-        </div>
+        <div class="loading">loading...</div>
       </section>
     </main>
     <footer></footer>

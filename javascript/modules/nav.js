@@ -3,6 +3,7 @@ import {
   navBarContainer,
   snapScrollContainer,
   navBarBtn,
+  main,
 } from "../utils/constants.js";
 
 export function navBarSetup() {
@@ -18,18 +19,14 @@ export function navBarSetup() {
 function handleNavDropdown(e) {
   if (navBarContainer.style.transform == `translateY(${navHeight}px)`) {
     navBarContainer.style.transform = "translateY(-200px)";
-    snapScrollContainer.removeEventListener(
-      "pointerenter",
-      handleNavDropdownClose
-    );
+    snapScrollContainer.removeEventListener("click", handleNavDropdownClose);
   } else {
     navBarContainer.style.transform = `translateY(${navHeight}px)`;
-    snapScrollContainer.addEventListener(
-      "pointerenter",
-      handleNavDropdownClose
-    );
+    main.addEventListener("click", handleNavDropdownClose);
   }
 }
 function handleNavDropdownClose(e) {
   navBarContainer.style.transform = "translateY(-200px)";
 }
+
+//sec nav
