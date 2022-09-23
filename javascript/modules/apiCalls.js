@@ -36,7 +36,6 @@ export async function getProducts(params) {
   try {
     const response = await fetch(`${productURL}?${params}`);
     const result = await response.json();
-
     return result;
   } catch (error) {
     console.error(error);
@@ -65,6 +64,9 @@ export async function uploadImg(formData, jwt) {
   try {
     const result = await fetch(uploadURL, {
       method: "POST",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
       body: formData,
     });
     const response = await result.json();
@@ -85,9 +87,14 @@ export async function GetImgById(id) {
   }
 }
 
-export async function deleteImg(id) {
+export async function deleteImg(id, jwt) {
   try {
-    const response = await fetch(filesURL + `/${id}`, { method: "DELETE" });
+    const response = await fetch(filesURL + `/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
     const result = await response.json();
     return result;
   } catch (error) {

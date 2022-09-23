@@ -1,17 +1,15 @@
 import { user } from "../modules/user.js";
 
 export function imagePreview(images) {
-  let imgElement = `<div class="col-12 d-flex justify-content-between">`;
-  console.log(images);
+  let imgElement = `<div class="container-fluid row row-cols-2">`;
   for (let i = 0; i < images.length; i++) {
-    imgElement += `<div class="small-img col-3">
+    imgElement += `<div class="col d-flex flex-column">
     <img
-    
-    src="${images[i].formats.thumbnail.url}"/>
+    src="${images[i].formats.small.url}"/>
     <p>${images[i].name}</p>
     <button
-    class="x remove-img" id ="${images[i].id}">Remove</button>
-  </div>`;
+    class="btn x remove-img bg-danger" id ="${images[i].id}">Remove</button></div>
+  `;
   }
 
   imgElement += `</div>`;
@@ -22,7 +20,12 @@ export function getLocalUser() {
 }
 
 export function userMessage(message) {
-  console.log(message);
+  const messageContainer = document.querySelector("#message-container");
+  messageContainer.innerHTML = `${message}`;
+}
+export function removeUserMessage() {
+  const messageContainer = document.querySelector("#message-container");
+  messageContainer.innerHTML = ``;
 }
 
 export function addToShoppingCart(item) {

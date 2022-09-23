@@ -92,36 +92,39 @@
               </li>
             </ul>
           </div>
-          <button id="shopping-cart_button">Cart</button>
+          <button id="shopping-cart_button" class="btn">
+            <svg
+              width="26"
+              height="27"
+              viewBox="0 0 26 27"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.82653 27C7.16327 27 6.59949 26.7635 6.1352 26.2904C5.67092 25.8173 5.43878 25.2428 5.43878 24.567C5.43878 23.8911 5.67092 23.3166 6.1352 22.8436C6.59949 22.3705 7.16327 22.1339 7.82653 22.1339C8.4898 22.1339 9.05357 22.3705 9.51786 22.8436C9.98214 23.3166 10.2143 23.8911 10.2143 24.567C10.2143 25.2428 9.98214 25.8173 9.51786 26.2904C9.05357 26.7635 8.4898 27 7.82653 27V27ZM21.0918 27C20.4286 27 19.8648 26.7635 19.4005 26.2904C18.9362 25.8173 18.7041 25.2428 18.7041 24.567C18.7041 23.8911 18.9362 23.3166 19.4005 22.8436C19.8648 22.3705 20.4286 22.1339 21.0918 22.1339C21.7551 22.1339 22.3189 22.3705 22.7832 22.8436C23.2474 23.3166 23.4796 23.8911 23.4796 24.567C23.4796 25.2428 23.2474 25.8173 22.7832 26.2904C22.3189 26.7635 21.7551 27 21.0918 27ZM6.10204 4.69712L9.75 12.4018H19.301L23.4464 4.69712H6.10204ZM5.10714 2.66959H24.6403C25.1488 2.66959 25.5357 2.90613 25.801 3.37922C26.0663 3.85232 26.0663 4.32541 25.801 4.7985L21.324 13.01C21.0808 13.438 20.7657 13.7816 20.3788 14.0407C19.9919 14.2997 19.5663 14.4293 19.102 14.4293H9.05357L7.19643 17.9437H23.4796V19.9712H7.4949C6.56633 19.9712 5.89753 19.6558 5.48852 19.025C5.07951 18.3942 5.08503 17.6846 5.5051 16.8961L7.62755 12.9086L2.58673 2.02753H0V0H3.8801L5.10714 2.66959ZM9.75 12.4018H19.301H9.75Z"
+                fill="black"
+              />
+            </svg>
+          </button>
           <div
             id="shopping-cart_container"
-            class="position-absolute top-0 end-0 d-flex flex-column"
+            class="position-absolute top-0 end-0"
           >
-            <ul class="added-products" id="added-products-container">
-              <li class="d-flex justify-content-between my-2">
-                <a href="/product-page.html?id=${this.id}" class="d-flex me-5"
-                  ><div class="circle overflow-hidden me-3">
-                    <img
-                      src="../img/full-suit-pexels-deepak-verma-1096849.jpg"
-                      alt=""
-                      class="w-100"
-                    />
-                  </div>
-                  <h5 class="my-auto fs-5">Product title</h5></a
-                >
-                <p class="my-auto me-2">999 Nok</p>
-                <button class="btn">X</button>
-              </li>
-            </ul>
-            <p id="cost-of-all-items" class="text-end">Tot: 999 Nok</p>
+            <ul class="added-products" id="added-products-container"></ul>
+            <p id="cost-of-all-items" class="text-end"></p>
             <button id="checkout">Go To Checkout</button>
             <button id="cancel">Continue Shopping</button>
           </div>
         </div>
       </nav>
     </header>
-    <main>
-      <form action="#" class="d-flex flex-column w-25 gap-2" id="login_form">
+    <main class="">
+      <h2 class="text-center mt-5">Login</h2>
+      <form
+        action="#"
+        class="d-flex flex-column w-25 gap-2 mx-auto mt-5"
+        id="login_form"
+      >
         <div class="d-flex flex-column">
           <label for="name">Name</label>
           <input type="name" name="name" id="form__name" />
@@ -132,6 +135,7 @@
         </div>
         <button type="submit" class="btn bg-success bg-opacity-50">Send</button>
       </form>
+      <div id="message-container" class="text-center"></div>
     </main>
     <footer></footer>
     <script src="/javascript/main.js" type="module"></script>

@@ -1,19 +1,33 @@
+import { removeUserMessage, userMessage } from "../utils/utils.js";
 import { clearForm, validateLength } from "../utils/validation.js";
 import { user } from "./user.js";
 
 const minLen = 2;
 const adminUrl = "https://it-suites-you.herokuapp.com/auth/local";
-export function loginFormSetup(form) {
+export async function loginFormSetup(form) {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const userName = e.path[0][0].value;
     const password = e.path[0][1].value;
     if (validateLength(userName, minLen) && validateLength(password, minLen)) {
+      removeUserMessage();
       const currentUser = new user(adminUrl, userName, password);
-      currentUser.login();
-      clearForm(e);
+      currentUser.login().then(() => {
+        console.log(currentUser.jwt);
+        if (!currentUser.jwt == "") {
+          userMessage("Success!");
+          redirect("add-products.html");
+        } else {
+          userMessage("invalid username or password");
+        }
+        clearForm(e);
+      });
     } else {
-      console.log("wrong!");
+      userMessage("name and password needs to be atleast 2 letters");
     }
   });
+}
+
+export function redirect(page) {
+  location.href = `${page}`;
 }

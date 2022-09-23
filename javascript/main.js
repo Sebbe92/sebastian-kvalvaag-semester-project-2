@@ -4,7 +4,7 @@ import {
   postProduct,
   uploadImg,
 } from "./modules/apiCalls.js";
-import { loginFormSetup } from "./modules/login.js";
+import { loginFormSetup, redirect } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
 import {
@@ -37,12 +37,21 @@ import { navBarSetup } from "./modules/nav.js";
 const shoppingCartContainer = document.querySelector(
   "#added-products-container"
 );
+import { makeDots, dotsTimer } from "./modules/loading.js";
 const totalCostShoppingCart = document.querySelector("#cost-of-all-items");
 let currentCategory = "";
 let currentProducts = [];
 
 const secNavCategoryBtns = document.querySelectorAll(".category-btn_sec-nav");
-
+if (location.pathname == "/add-products.html") {
+  if (getLocalUser()) {
+    if (productFormContainer) {
+      makeForm(productFormContainer);
+    }
+  } else {
+    redirect("admin.html");
+  }
+}
 function secNavSetup() {
   secNavCategoryBtns.forEach((btn) => {
     btn.classList.remove("active");
@@ -60,9 +69,8 @@ function secNavSetup() {
     });
   });
 }
-
+updateShoppingcart();
 if (location.pathname == "/product-page.html") {
-  console.log("loading product...");
   let currentProduct = {};
   const params = new URLSearchParams(location.search);
   const productId = params.get("id");
@@ -118,10 +126,6 @@ if (loginForm) {
 
 window.addEventListener("resize", navBarSetup);
 navBarSetup();
-
-if (productFormContainer) {
-  makeForm(productFormContainer);
-}
 
 async function makeProducts(list, container) {
   let newHtml = "";
@@ -189,7 +193,9 @@ if (productsOutput) {
   secNavSetup();
 }
 function displayProducts() {
-  productsOutput.innerHTML = `<div class="loading"></div>`;
+  productsOutput.innerHTML = `<div class="dot_container"></div>`; //add loading under dots
+  makeDots();
+  dotsTimer();
   if (currentCategory) {
     getProducts(`specs=${currentCategory}`).then((list) => {
       makeProducts(list, productsOutput);
@@ -234,7 +240,6 @@ function addCardEventListers() {
         .fullImageModal(0);
     });
   });
-  updateShoppingcart();
 }
 
 function updateShoppingcart() {

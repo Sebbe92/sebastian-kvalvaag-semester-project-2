@@ -6,8 +6,8 @@ export class user {
     this.userName = userName;
     this.password = password;
   }
-  login() {
-    getJWT(this.url, this.userName, this.password).then((jwt) => {
+  async login() {
+    await getJWT(this.url, this.userName, this.password).then((jwt) => {
       this.jwt = jwt;
       if (this.jwt) {
         this.password = "";

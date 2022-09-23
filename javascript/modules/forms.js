@@ -26,7 +26,7 @@ export function makeForm(
   sizes = true,
   files = true
 ) {
-  let formHtml = `<form action="#" class="col-lg-6 d-flex flex-column" id="product_form">`;
+  let formHtml = `<form action="#" class="col-12 col-lg-5 d-flex flex-column mb-2" id="product_form">`;
   if (title) {
     formHtml += `<label for="title">Product title</label>
 <input type="text" name="title" id="title" />`;
@@ -48,7 +48,7 @@ product-description"
     rows="10"
   ></textarea>`;
   }
-  formHtml += `<div class="d-flex">`;
+  formHtml += `<div class="d-flex flex-column flex-lg-row mb-2">`;
   if (categories) {
     formHtml += makeDropdownHtml("Categories", productCategories, "checkbox");
   }
@@ -60,7 +60,7 @@ product-description"
   }
   formHtml += `</div>`;
 
-  formHtml += `<button type="submit" class="btn btn-primary">Preview</button></form>`;
+  formHtml += `<button type="submit" class="btn btn-primary">Preview</button><div id="message-container"</form>`;
 
   displayContainer.innerHTML += formHtml;
   imageUploadForm(displayContainer);
@@ -70,7 +70,7 @@ product-description"
 }
 
 function imageUploadForm(container) {
-  container.innerHTML += `<form id="upload_form">
+  container.innerHTML += `<form id="upload_form" class="col-12 offset-lg-1 col-lg-6">
     <input
       type="file"
       name="files"
@@ -79,16 +79,17 @@ function imageUploadForm(container) {
       class="drag-n-drop"
       multiple
     />
-  <button class="btn" id="upload-btn">Upload</button>
-  </form><div id="upload-preview" class="container-fluid"></div>`;
+  <button class="btn bg-primary text-white float-end" id="upload-btn">Upload</button>
+  <div id="upload-preview" class=""></div></form>`;
 }
 function imageUploadSubmit() {
   const imageUploadForm = document.querySelector("#upload_form");
   const uploadPreview = document.querySelector("#upload-preview");
   imageUploadForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    uploadPreview.innerHTML = `<div class="loader">loading...</div>`;
+    uploadPreview.innerHTML = `<div class="dots"></div>`;
     const data = new FormData(e.target);
+    console.log(data, getLocalUser().jwt);
     uploadImg(data, getLocalUser().jwt).then((imgs) => {
       imgs.forEach((img) => {
         uploadedFiles.push(img);
@@ -109,7 +110,7 @@ function addRemoveBtns(uploadPreview) {
           return true;
         }
       });
-      deleteImg(e.path[0].id);
+      deleteImg(e.path[0].id, getLocalUser().jwt);
       console.log(uploadedFiles);
       uploadPreview.innerHTML = imagePreview(uploadedFiles);
       addRemoveBtns(uploadPreview);
@@ -228,8 +229,12 @@ async function makeProductFromForm(e, images) {
 }
 function productFormSubmit() {
   const productForm = document.querySelector("#product_form");
+  validateForm(productForm);
   productForm.addEventListener("submit", (e) => {
     e.preventDefault();
     makeProductFromForm(e, uploadedFiles);
   });
+}
+function validateForm(form) {
+  console.log(form);
 }
