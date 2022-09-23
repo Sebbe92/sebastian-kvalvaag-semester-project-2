@@ -69,6 +69,7 @@ function secNavSetup() {
     });
   });
 }
+
 updateShoppingcart();
 if (location.pathname == "/product-page.html") {
   let currentProduct = {};
@@ -245,38 +246,39 @@ function addCardEventListers() {
 function updateShoppingcart() {
   shoppingCartContainer.innerHTML = "";
   const shoppingCartList = JSON.parse(localStorage.getItem("shoppingcart"));
-  console.log(shoppingCartList);
   let newHtml = ``;
   let totalPrice = 0;
-  for (let i = 0; i < shoppingCartList.length; i++) {
-    console.log(i);
-    console.log("before", shoppingCartList[i][0]);
-    shoppingCartContainer.innerHTML += `<li class="d-flex justify-content-between my-2">
-<a href="/product-page.html?id=${shoppingCartList[i][0].id}" class="d-flex me-5"
-  ><div class="circle overflow-hidden me-3">
-    <img
-      src="${shoppingCartList[i][0].images[0].formats.thumbnail.url}"
-      alt=""
-      class="w-100"
-    />
-  </div>
-  <h5 class="my-auto fs-5">${shoppingCartList[i][0].title}</h5></a
->
-<p class="my-auto me-2">${shoppingCartList[i][0].price}</p>
-<button class="btn remove-from-cart-btn" id="${i}">X</button>
-</li>`;
-    totalPrice = totalPrice + shoppingCartList[i][0].price;
-  }
-  totalCostShoppingCart.innerHTML = `Tot: ${totalPrice} Nok`;
-  const removeBtns = document.querySelectorAll(".remove-from-cart-btn");
-  removeBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      console.log(e.target.id);
-      removeFromShoppingCart(e.target.id);
-      updateShoppingcart();
+  if (shoppingCartList) {
+    for (let i = 0; i < shoppingCartList.length; i++) {
+      console.log(i);
+      console.log("before", shoppingCartList[i][0]);
+      shoppingCartContainer.innerHTML += `<li class="d-flex justify-content-between my-2">
+  <a href="/product-page.html?id=${shoppingCartList[i][0].id}" class="d-flex me-5"
+    ><div class="circle overflow-hidden me-3">
+      <img
+        src="${shoppingCartList[i][0].images[0].formats.thumbnail.url}"
+        alt=""
+        class="w-100"
+      />
+    </div>
+    <h5 class="my-auto fs-5">${shoppingCartList[i][0].title}</h5></a
+  >
+  <p class="my-auto me-2">${shoppingCartList[i][0].price}</p>
+  <button class="btn remove-from-cart-btn" id="${i}">X</button>
+  </li>`;
+      totalPrice = totalPrice + shoppingCartList[i][0].price;
+    }
+    totalCostShoppingCart.innerHTML = `Tot: ${totalPrice} Nok`;
+    const removeBtns = document.querySelectorAll(".remove-from-cart-btn");
+    removeBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        console.log(e.target.id);
+        removeFromShoppingCart(e.target.id);
+        updateShoppingcart();
+      });
     });
-  });
+  }
 }
 
 /* if (shoppingCartContainer) {
