@@ -44,7 +44,14 @@ export class product {
     let categoriesHtml = "";
     const colorsHtml = this.createColorsHtml();
     let sizesHtml = "";
-
+    const imagesurl = [];
+    for (var i = 0; i < this.images.length; i++) {
+      if (!this.images[i].formats) {
+        imagesurl.push(`/img/logo-stock-img.png`);
+      } else {
+        imagesurl.push(this.images[i].formats.medium.url);
+      }
+    }
     sizesHtml = makeDropdownHtml("Size", this.size, "radio");
     console.log(sizesHtml);
     this.specs.forEach((category) => {
@@ -57,24 +64,24 @@ export class product {
     <div class=" col-12 col-md-8 row mx-auto max-500">
       <div class="col-12 col-sm-9 big-img">
         <img
-          src="${this.images[0].formats.medium.url}"
+          src="${imagesurl[0]}"
           alt="${this.description}"
           class="my-auto"
         />
       </div>
       <div class="col-12 col-sm-3 d-flex flex-row flex-sm-column  container row row-cols-3 mx-auto justify-content-around px-3 p-sm-0 max-h-373">
       <img
-      src="${this.images[1].formats.small.url}"
+      src="${imagesurl[1]}"
       alt="${this.description}"
       class="small-img"
       />
       <img
-      src="${this.images[2].formats.small.url}"
+      src="${imagesurl[2]}"
       alt="${this.description}"
       class="small-img"
       />
       <img
-      src="${this.images[3].formats.small.url}"
+      src="${imagesurl[3]}"
       alt="${this.description}"
       class="small-img"
       />
@@ -108,7 +115,6 @@ export class product {
     }
 
     let imageUrl = "";
-    console.log(this.images[0]);
     if (this.images[0].formats) {
       imageUrl = this.images[0].formats.small.url;
     } else {

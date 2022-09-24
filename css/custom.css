@@ -280,7 +280,7 @@ p {
 
 .scroll-snap_container .full-page {
   min-height: 100%;
-  scroll-snap-align: top;
+  scroll-snap-align: center;
 }
 
 .page-scroll {
@@ -332,6 +332,10 @@ p {
 
 #search-dropdown p {
   cursor: pointer;
+}
+
+main {
+  overflow: auto;
 }
 
 .btn-font-small {
