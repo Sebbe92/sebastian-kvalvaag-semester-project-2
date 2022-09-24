@@ -153,7 +153,6 @@ function closeCart() {
   cartContainer.classList.remove("open");
 }
 if (snapScrollContainer) {
-  console.log(header.clientHeight);
   snapScrollContainer.style.height = `height: calc(100vh - ${header.innerHeight}px)`;
   snapScrollContainer.addEventListener("scroll", (e) => {
     if (snapScrollContainer.scrollTop >= window.innerHeight) {
