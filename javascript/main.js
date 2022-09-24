@@ -153,7 +153,8 @@ function closeCart() {
   cartContainer.classList.remove("open");
 }
 if (snapScrollContainer) {
-  snapScrollContainer.style.height = `height: calc(100vh - ${header.innerHeight}px)`;
+  console.log(`height: calc(100vh - ${header.clientHeight}px)`);
+  snapScrollContainer.style.height = `calc(100vh - ${header.clientHeight}px)`;
   snapScrollContainer.addEventListener("scroll", (e) => {
     if (snapScrollContainer.scrollTop >= window.innerHeight) {
       snapScrollContainer.style.scrollSnapType = "none";
