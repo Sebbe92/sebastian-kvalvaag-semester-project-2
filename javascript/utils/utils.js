@@ -33,7 +33,7 @@ export function addToShoppingCart(item) {
     localStorage.setItem("shoppingcart", JSON.stringify([]));
   }
   const currentCart = JSON.parse(localStorage.getItem("shoppingcart"));
-  currentCart.push(item);
+  currentCart.push(item[0]);
   localStorage.setItem("shoppingcart", JSON.stringify(currentCart));
 }
 export function removeFromShoppingCart(id) {

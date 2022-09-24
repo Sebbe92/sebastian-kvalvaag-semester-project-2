@@ -32,6 +32,7 @@ import {
   navBarContainer,
   cartContainer,
   productsOutput,
+  main,
 } from "./utils/constants.js";
 import { navBarSetup } from "./modules/nav.js";
 const shoppingCartContainer = document.querySelector(
@@ -39,6 +40,8 @@ const shoppingCartContainer = document.querySelector(
 );
 import { makeDots, dotsTimer } from "./modules/loading.js";
 const totalCostShoppingCart = document.querySelector("#cost-of-all-items");
+const closeShoppingcartBtn = document.querySelector("#cancel-cart");
+
 let currentCategory = "";
 let currentProducts = [];
 
@@ -52,6 +55,8 @@ if (location.pathname == "/add-products.html") {
     redirect("admin.html");
   }
 }
+const searchInput = document.querySelector("#search-input");
+
 function secNavSetup() {
   secNavCategoryBtns.forEach((btn) => {
     btn.classList.remove("active");
@@ -68,6 +73,11 @@ function secNavSetup() {
       displayProducts();
     });
   });
+  searchInput.addEventListener("input", searchProducts);
+}
+function searchProducts(e) {
+  e.preventDefault();
+  console.log(e.target.value);
 }
 
 updateShoppingcart();
@@ -95,10 +105,16 @@ if (location.pathname == "/product-page.html") {
 
 if (cartBtn) {
   if (cartContainer) {
-    cartBtn.addEventListener("click", () => {
-      cartContainer.classList.toggle("open");
-    });
+    cartBtn.addEventListener("click", toggleCart);
+    closeShoppingcartBtn.addEventListener("click", closeCart);
   }
+}
+function toggleCart() {
+  cartContainer.classList.toggle("open");
+  main.addEventListener("click", closeCart);
+}
+function closeCart() {
+  cartContainer.classList.remove("open");
 }
 if (snapScrollContainer) {
   snapScrollContainer.addEventListener("scroll", (e) => {
@@ -154,6 +170,16 @@ async function makeProducts(list, container) {
     for (let i = 0; i < currentProducts.length; i++) {
       if (currentProducts[i].images.length == 0) {
         await currentProducts[i].getImageDetails().then(() => {
+          for (let j = 0; j < currentProducts[i].images.length; j++)
+            if (!currentProducts[i].images[j].formats) {
+              console.log(currentProducts[i]);
+              currentProducts[i].images[j].formats = {
+                large: { url: "/img/logo-stock-img.png" },
+                medium: { url: "/img/logo-stock-img.png" },
+                small: { url: "/img/logo-stock-img.png" },
+                thumbnail: { url: "/img/logo-stock-img.png" },
+              };
+            }
           newHtml += currentProducts[i].makeProductCard();
         });
       } else {
@@ -217,7 +243,7 @@ function addCardEventListers() {
   console.log(addToCartBtns);
   addToCartBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
-      console.log(e);
+      console.log(btn);
       e.preventDefault();
       if (!localStorage.getItem("shoppingcart")) {
         localStorage.setItem("shoppingcart", "");
@@ -225,7 +251,7 @@ function addCardEventListers() {
 
       addToShoppingCart(
         currentProducts.filter((product) => {
-          return product.id == e.srcElement.id;
+          return product.id == btn.id;
         })
       );
       updateShoppingcart();
@@ -248,36 +274,38 @@ function updateShoppingcart() {
   const shoppingCartList = JSON.parse(localStorage.getItem("shoppingcart"));
   let newHtml = ``;
   let totalPrice = 0;
-  if (shoppingCartList) {
+  console.log(shoppingCartList);
+  if (shoppingCartList && shoppingCartList.length > 0) {
     for (let i = 0; i < shoppingCartList.length; i++) {
-      console.log(i);
-      console.log("before", shoppingCartList[i][0]);
       shoppingCartContainer.innerHTML += `<li class="d-flex justify-content-between my-2">
-  <a href="/product-page.html?id=${shoppingCartList[i][0].id}" class="d-flex me-5"
+  <a href="/product-page.html?id=${shoppingCartList[i].id}" class="d-flex me-5"
     ><div class="circle overflow-hidden me-3">
       <img
-        src="${shoppingCartList[i][0].images[0].formats.thumbnail.url}"
+        src="${shoppingCartList[i].images[0].formats.thumbnail.url}"
         alt=""
         class="w-100"
       />
     </div>
-    <h5 class="my-auto fs-5">${shoppingCartList[i][0].title}</h5></a
+    <h5 class="my-auto fs-5">${shoppingCartList[i].title}</h5></a
   >
-  <p class="my-auto me-2">${shoppingCartList[i][0].price}</p>
+  <p class="my-auto me-2">${shoppingCartList[i].price}</p>
   <button class="btn remove-from-cart-btn" id="${i}">X</button>
   </li>`;
-      totalPrice = totalPrice + shoppingCartList[i][0].price;
+      totalPrice = totalPrice + shoppingCartList[i].price;
     }
     totalCostShoppingCart.innerHTML = `Tot: ${totalPrice} Nok`;
     const removeBtns = document.querySelectorAll(".remove-from-cart-btn");
     removeBtns.forEach((btn) => {
       btn.addEventListener("click", (e) => {
         e.preventDefault();
-        console.log(e.target.id);
-        removeFromShoppingCart(e.target.id);
+        console.log(e.path[1].id);
+        removeFromShoppingCart(e.path[1].id);
         updateShoppingcart();
       });
     });
+  } else {
+    totalPrice = 0;
+    totalCostShoppingCart.innerHTML = `Tot: ${totalPrice} Nok`;
   }
 }
 

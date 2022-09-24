@@ -40,6 +40,7 @@ export class product {
     return colorsHtml;
   }
   createProductPage(location) {
+    console.log(this);
     let categoriesHtml = "";
     const colorsHtml = this.createColorsHtml();
     let sizesHtml = "";
@@ -49,7 +50,10 @@ export class product {
     this.specs.forEach((category) => {
       categoriesHtml += `<li>${category}</li>`;
     });
-    const html = `<section class="row mt-3 bg-white mx-auto justify-content-around">
+    const htmlHead = document.querySelector("head");
+    htmlHead.innerHTML += `<title>ISU | ${this.title}</title><meta name="description" content="${this.description}"`;
+
+    const html = `<section class="row mt-5 bg-white mx-auto justify-content-around">
     <div class=" col-12 col-md-8 row mx-auto max-500">
       <div class="col-12 col-sm-9 big-img">
         <img
@@ -58,7 +62,7 @@ export class product {
           class="my-auto"
         />
       </div>
-      <div class="col-12 col-sm-3 d-flex flex-row flex-sm-column  container row row-cols-3 mx-auto justify-content-around px-3 p-sm-0">
+      <div class="col-12 col-sm-3 d-flex flex-row flex-sm-column  container row row-cols-3 mx-auto justify-content-around px-3 p-sm-0 max-h-373">
       <img
       src="${this.images[1].formats.small.url}"
       alt="${this.description}"
@@ -77,9 +81,9 @@ export class product {
 
       </div>
     </div>
-    <div class="col-12 col-md-5  d-flex flex-column">
-      <h1>${this.title}</h1>
-      <div>
+    <div class="col-12 col-md-6 mx-auto d-flex flex-column ">
+      <h1 class="w-75">${this.title}</h1>
+      <div class="w-50">
         <p>${this.description}</p>
       </div>
       <ul>
@@ -88,22 +92,27 @@ export class product {
       <div class="d-flex gap-2">
         ${colorsHtml}
       </div>
+      <div class="d-flex">
       ${sizesHtml}
-      <button class="mt-auto buy-now-btn">Buy Now</button>
+      <button class="btn btn-primary mt-auto buy-now-btn w-25 m-0 ms-auto me-5">Buy Now</button>
+    </div>
     </div>
   </section>
   `;
     location.innerHTML = html;
   }
-  makeProductCard(container) {
+  makeProductCard() {
     let colorsHtml = "";
     if (this.color) {
       colorsHtml = this.createColorsHtml();
     }
 
-    let imageUrl = "#";
-    if (this.images[0]) {
+    let imageUrl = "";
+    console.log(this.images[0]);
+    if (this.images[0].formats) {
       imageUrl = this.images[0].formats.small.url;
+    } else {
+      imageUrl = `/img/logo-stock-img.png`;
     }
     const newHtml = `<div class="card col mt-3" id="card-${this.id}" >
     <div class="square-img-frame">
@@ -122,10 +131,10 @@ export class product {
           ${this.price} Nok
         </p>
         <div class="d-flex justify-content-between">
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2 align-items-center">
             ${colorsHtml}
           </div>
-          <button href="#" class="btn btn-success fs-6 add-to-cart-btn" id="${this.id}" >Add To Cart</button>
+          <button href="#" class="btn btn-white p-0 add-to-cart-btn" id="${this.id}" ><svg xmlns="http://www.w3.org/2000/svg"  height="48" width="48"><path fill="#002632" d="M22.5 34h3v-8.5H34v-3h-8.5V14h-3v8.5H14v3h8.5ZM9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h30q1.2 0 2.1.9.9.9.9 2.1v30q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V9H9v30ZM9 9v30V9Z"/></svg></button>
         </div>
       </div>
       </a>

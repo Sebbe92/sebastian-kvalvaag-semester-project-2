@@ -144,8 +144,13 @@ export function addDropdownListeners() {
     button.addEventListener("click", () => {
       button.nextSibling.nextSibling.classList.toggle("active");
 
-      console.log(button.parentElement.id);
-      button.parentElement.addEventListener("pointerleave", dropdownClose);
+      console.log(button.parentElement.parentElement);
+      button.parentElement.parentElement.addEventListener("click", (e) => {
+        if (!e.path[0].nodeName == "DIV") {
+          dropdownClose();
+        }
+      });
+      /* button.addEventListener("click", dropdownClose); */
     });
   });
   const dropdownLis = document.querySelectorAll(".dropdown li");

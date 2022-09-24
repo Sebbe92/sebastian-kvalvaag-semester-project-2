@@ -4,11 +4,30 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/icons/site.webmanifest" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/custom.css" />
+    <title>It Suites You</title>
   </head>
   <body class="position-relative">
     <header class="position-sticky top-0 shadow">
@@ -112,8 +131,12 @@
           >
             <ul class="added-products" id="added-products-container"></ul>
             <p id="cost-of-all-items" class="text-end"></p>
-            <button id="checkout">Go To Checkout</button>
-            <button id="cancel">Continue Shopping</button>
+            <button id="checkout-cart" class="btn btn-success m-2">
+              Go To Checkout
+            </button>
+            <button id="cancel-cart" class="btn btn-primary m-2">
+              Continue Shopping
+            </button>
           </div>
         </div>
       </nav>
@@ -142,7 +165,18 @@
                 Check It Out
               </button>
             </div>
-            <h2 class="mx-auto mt-auto">v</h2>
+            <h4 class="mx-auto mt-auto text-white">Scroll</h4>
+            <svg
+              class="mx-auto"
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              width="48"
+            >
+              <path
+                fill=" #b3b3b3b0"
+                d="M24 38 12 26l2.1-2.1 9.9 9.9 9.9-9.9L36 26Zm0-12.65-12-12 2.1-2.1 9.9 9.9 9.9-9.9 2.1 2.1Z"
+              />
+            </svg>
           </div>
         </div>
       </section>

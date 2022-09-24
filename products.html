@@ -4,10 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/icons/site.webmanifest" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/custom.css" />
-
-    <title>Document</title>
+    <meta
+      name="description"
+      content="The finest products from It Suits You,come and visit us at location or get your suit online with a few clicks"
+    />
+    <title>ISU | Products</title>
   </head>
   <body>
     <header class="position-sticky top-0 shadow">
@@ -111,8 +132,12 @@
           >
             <ul class="added-products" id="added-products-container"></ul>
             <p id="cost-of-all-items" class="text-end"></p>
-            <button id="checkout">Go To Checkout</button>
-            <button id="cancel">Continue Shopping</button>
+            <button id="checkout-cart" class="btn btn-success m-2">
+              Go To Checkout
+            </button>
+            <button id="cancel-cart" class="btn btn-primary m-2">
+              Continue Shopping
+            </button>
           </div>
         </div>
       </nav>
@@ -121,7 +146,7 @@
       <dialog closed class="centered-modal" id="full-img-modal"></dialog>
       <section class="categories_sec-nav bg-primary m-0 container-fluid row">
         <div
-          class="d-flex justify-content-around align-items-center flex-wrap col-12 col-md-7"
+          class="d-flex justify-content-center gap-2 align-items-center flex-wrap col-12 col-md-7"
         >
           <a href="#" class="category-btn_sec-nav active" id="">All</a>
           <a href="#" class="category-btn_sec-nav" id="full-suit">Full Suit</a
@@ -137,14 +162,13 @@
           role="search"
         >
           <input
+            id="search-input"
             class="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-info text-white" type="submit">
-            Search
-          </button>
+          <button class="btn btn-outline-white text-white">Search</button>
         </form>
       </section>
       <section

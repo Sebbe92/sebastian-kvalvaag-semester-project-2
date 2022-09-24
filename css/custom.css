@@ -116,6 +116,14 @@ p {
   max-width: 500px;
 }
 
+.max-h-373 {
+  max-height: 373px;
+}
+
+.buy-now-btn {
+  margin-right: 75%;
+}
+
 .circle {
   width: 25px;
   height: 25px;
