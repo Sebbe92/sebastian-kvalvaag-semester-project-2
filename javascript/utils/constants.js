@@ -2,6 +2,8 @@ export const body = document.querySelector("body");
 export const productFormContainer = document.querySelector(
   "#product-form_container"
 );
+export const header = document.querySelector("header");
+
 export const main = document.querySelector("main");
 
 export const loginForm = document.querySelector("#login_form");

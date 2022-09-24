@@ -33,6 +33,7 @@ import {
   cartContainer,
   productsOutput,
   main,
+  header,
 } from "./utils/constants.js";
 import { navBarSetup } from "./modules/nav.js";
 const shoppingCartContainer = document.querySelector(
@@ -74,12 +75,47 @@ function secNavSetup() {
     });
   });
   searchInput.addEventListener("input", searchProducts);
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key == "Enter") {
+      e.preventDefault();
+      filterProducts(e);
+    }
+  });
+}
+const searchDropdown = document.querySelector("#search-dropdown");
+
+function filterProducts(e) {
+  productsOutput.innerHTML = "";
+  currentProducts.forEach((product) => {
+    const regEx = new RegExp(`(${e.target.value})`, `gi`);
+
+    if (regEx.test(product.title)) {
+      console.log(product);
+      productsOutput.innerHTML += product.makeProductCard();
+    }
+  });
 }
 function searchProducts(e) {
   e.preventDefault();
-  console.log(e.target.value);
+  searchDropdown.innerHTML = "";
+  const regEx = new RegExp(`(${e.target.value})`, `gi`);
+  if (!e.target.value == "") {
+    currentProducts.forEach((product) => {
+      if (regEx.test(product.title)) {
+        console.log(product.title);
+        searchDropdown.innerHTML += `<p>${product.title}</p>`;
+        console.log(searchDropdown.children.length);
+        for (let i = 0; i < searchDropdown.children.length; i++) {
+          searchDropdown.children[i].addEventListener("click", (e) => {
+            console.log(e);
+            searchInput.value = e.target.outerText;
+            searchDropdown.innerHTML = "";
+          });
+        }
+      }
+    });
+  }
 }
-
 updateShoppingcart();
 if (location.pathname == "/product-page.html") {
   let currentProduct = {};
@@ -117,6 +153,8 @@ function closeCart() {
   cartContainer.classList.remove("open");
 }
 if (snapScrollContainer) {
+  console.log(header.clientHeight);
+  snapScrollContainer.style.height = `height: calc(100vh - ${header.innerHeight}px)`;
   snapScrollContainer.addEventListener("scroll", (e) => {
     if (snapScrollContainer.scrollTop >= window.innerHeight) {
       snapScrollContainer.style.scrollSnapType = "none";
