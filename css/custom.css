@@ -280,7 +280,7 @@ p {
 
 .scroll-snap_container .full-page {
   min-height: 100%;
-  scroll-snap-align: center;
+  scroll-snap-align: top;
 }
 
 .page-scroll {
