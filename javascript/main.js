@@ -87,6 +87,7 @@ function secNavSetup() {
 const searchDropdown = document.querySelector("#search-dropdown");
 
 function filterProducts(value) {
+  searchInput.value = "";
   productsOutput.innerHTML = "";
   currentProducts.forEach((product) => {
     const regEx = new RegExp(`(${value})`, `gi`);
