@@ -214,7 +214,6 @@ p {
           box-shadow: 0px 0px 2px #111;
   width: 100%;
   overflow: hidden;
-  background-color: #747474;
   background-size: cover;
   aspect-ratio: 1;
   display: -webkit-box;
@@ -273,7 +272,7 @@ p {
           flex: none;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  background-color: #aeb9c5;
+  background-color: #002632;
   -ms-scroll-snap-type: y mandatory;
       scroll-snap-type: y mandatory;
 }
