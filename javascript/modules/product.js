@@ -67,6 +67,7 @@ export class product {
           src="${imagesurl[0]}"
           alt="${this.description}"
           class="my-auto"
+          id="0"
         />
       </div>
       <div class="col-12 col-sm-3 d-flex flex-row flex-sm-column  container row row-cols-3 mx-auto justify-content-around px-3 p-sm-0 max-h-373">
@@ -74,16 +75,19 @@ export class product {
       src="${imagesurl[1]}"
       alt="${this.description}"
       class="small-img"
+      id="1"
       />
       <img
       src="${imagesurl[2]}"
       alt="${this.description}"
       class="small-img"
+      id="2"
       />
       <img
       src="${imagesurl[3]}"
       alt="${this.description}"
       class="small-img"
+      id="3"
       />
 
       </div>
