@@ -83,8 +83,8 @@ if (location.pathname == "/products.html") {
     secNavSetup();
   }
 }
-
-if (location.pathname == "/index.html") {
+console.log(location.pathname);
+if (location.pathname == "/index.html" || location.pathname == "/") {
   setupHeroImg();
   makeProducts();
 }
@@ -337,7 +337,8 @@ function updateShoppingcart() {
 }
 async function makeProducts() {
   let params = "";
-  if (location.pathname == "/index.html" || !location.pathname) {
+  console.log(location.pathname);
+  if (location.pathname == "/index.html" || location.pathname == "/") {
     params = "featured=true";
   }
   getProducts(params).then((list) => {
