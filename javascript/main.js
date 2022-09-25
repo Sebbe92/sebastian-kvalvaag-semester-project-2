@@ -61,8 +61,8 @@ if (location.pathname == "/products.html") {
     console.log(main.scrollTop, main.scrollHeight - main.clientHeight);
     if (main.scrollTop > main.scrollHeight - main.clientHeight - 1) {
       main.scrollTo(0, main.scrollHeight - main.clientHeight - 2);
-      displayProducts();
       productsToLoad = productsToLoad + 10;
+      makeProducts(currentProducts, productsOutput);
     }
   });
 }
@@ -296,7 +296,6 @@ if (productsOutput) {
   secNavSetup();
 }
 function displayProducts() {
-  console.log(currentCategory);
   productsOutput.innerHTML += `<div class="dot_container"></div>`;
   makeDots();
   dotsTimer();
