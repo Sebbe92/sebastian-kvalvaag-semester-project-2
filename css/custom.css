@@ -124,6 +124,15 @@ p {
   margin-right: 75%;
 }
 
+.card-body_price {
+  top: -30px;
+  right: 5px;
+  color: #fff;
+  background-color: #002632;
+  border-radius: 50vw;
+  border: 1px solid black;
+}
+
 .circle {
   width: 25px;
   height: 25px;
@@ -306,6 +315,13 @@ p {
   min-width: 100%;
 }
 
+#about-section {
+  max-width: 700px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 #full-img-modal {
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -359,11 +375,11 @@ main {
   cursor: pointer;
 }
 
-.test-btn:hover .btn-font-big {
+.test-btn:hover .btn-font-big, .test-btn.active .btn-font-big {
   opacity: 1;
 }
 
-.test-btn:hover .btn-font-small {
+.test-btn:hover .btn-font-small, .test-btn.active .btn-font-small {
   opacity: 0;
 }
 
@@ -438,10 +454,6 @@ main {
   margin-left: 5px;
 }
 
-.add-to-cart-btn:hover {
-  content: "+";
-}
-
 .close-btn {
   cursor: pointer;
 }
@@ -474,6 +486,8 @@ nav {
 }
 
 #shopping-cart_container {
+  max-height: 90vh;
+  overflow: scroll;
   visibility: hidden;
   overflow-x: hidden;
   display: -webkit-box;
@@ -635,5 +649,9 @@ nav {
   border-radius: 100%;
   min-width: 10px;
   aspect-ratio: 1;
+}
+
+main {
+  min-height: 90vh;
 }
 /*# sourceMappingURL=custom.css.map */

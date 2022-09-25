@@ -124,8 +124,9 @@ export class product {
     } else {
       imageUrl = `/img/logo-stock-img.png`;
     }
-    const newHtml = `<div class="card col mt-3" id="card-${this.id}" >
-    <div class="square-img-frame">
+    const newHtml = `<div class="shadow card col mt-3" id="card-${this.id}" >
+    <a href="product-page.html?id=${this.id}" class="">
+    <div class="square-img-frame ">
     <img
     src="${imageUrl}"
     alt="${this.description}"
@@ -133,21 +134,21 @@ export class product {
     
   /></div>
       <div class="card-body p-1 pt-2 position-relative" style={z-index:"-1"}>
-      <a href="product-page.html?id=${this.id}" class="bg-primary">
-        <h5 class="card-title w-75">${this.title}</h5>
+      
+        <h5 class="card-title w-75 m-0">${this.title}</h5>
         <p
-          class="card-text m-0 mt-auto position-absolute top-0 end-0 pt-1"
+          class="card-text m-0 mt-auto position-absolute card-body_price p-1 shadow"
         >
           ${this.price} Nok
         </p>
         <div class="d-flex justify-content-between">
           <div class="d-flex gap-2 align-items-center">
             ${colorsHtml}
-          </div>
+          </div></a>
           <button href="#" class="btn btn-white p-0 add-to-cart-btn" id="${this.id}" ><svg xmlns="http://www.w3.org/2000/svg"  height="48" width="48"><path fill="#002632" d="M22.5 34h3v-8.5H34v-3h-8.5V14h-3v8.5H14v3h8.5ZM9 42q-1.2 0-2.1-.9Q6 40.2 6 39V9q0-1.2.9-2.1Q7.8 6 9 6h30q1.2 0 2.1.9.9.9.9 2.1v30q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h30V9H9v30ZM9 9v30V9Z"/></svg></button>
         </div>
       </div>
-      </a>
+      
   </div>`;
     return newHtml;
   }

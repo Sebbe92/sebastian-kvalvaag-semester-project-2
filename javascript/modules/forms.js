@@ -215,16 +215,15 @@ async function makeProductFromForm(e, images) {
   newProduct.getImageDetails().then(() => {
     newProduct.createProductPage(displayContainer);
     displayContainer.showModal();
-    displayContainer.innerHTML += `<button id="publish-btn">Publish</button><button id="cancel-btn">Cancel</button>`;
+    displayContainer.innerHTML += `<button href="#" id="publish-btn">Publish</button><button id="cancel-btn">Cancel</button>`;
     const publishBtn = document.querySelector("#publish-btn");
     const cancelBtn = document.querySelector("#cancel-btn");
 
     publishBtn.addEventListener("click", (e) => {
       e.preventDefault();
       newProduct.stringifyLists();
-      newProduct.publishProduct().then(() => {
-        clearForm();
-      });
+      newProduct.publishProduct();
+      clearForm();
     });
     cancelBtn.addEventListener("click", (e) => {
       displayContainer.innerHTML = "";

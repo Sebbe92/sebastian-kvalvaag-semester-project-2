@@ -81,7 +81,7 @@
             >
               <li class="nav-item">
                 <a
-                  class="nav-link position-relative test-btn"
+                  class="nav-link position-relative test-btn active"
                   aria-current="page"
                   href="index.html"
                 >
@@ -194,43 +194,36 @@
           ></ul>
         </div>
       </section>
-      <section>
-        <div class="w-100">
-          <h2 class="text-center fw-bold fs-1 text-uppercase my-5">
-            Categories
-          </h2>
-          <ul
-            class="container-fluid row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-5 mx-auto g-2 justify-content-center"
-            id="categories-list"
-          >
-            <div class="w-100">
-              <h2 class="text-center fw-bold fs-1 text-uppercase my-5">
-                Categories
-              </h2>
-              <ul
-                class="container-fluid row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-5 mx-auto g-2 justify-content-center"
-                id="categories-list"
-              ></ul>
-            </div>
-            <div class="w-100">
-              <h2 class="text-center fw-bold fs-1 text-uppercase my-5">
-                Categories
-              </h2>
-              <ul
-                class="container-fluid row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-5 mx-auto g-2 justify-content-center"
-                id="categories-list"
-              ></ul>
-            </div>
-            <div class="w-100">
-              <h2 class="text-center fw-bold fs-1 text-uppercase my-5">
-                Categories
-              </h2>
-              <ul
-                class="container-fluid row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-5 mx-auto g-2 justify-content-center"
-                id="categories-list"
-              ></ul>
-            </div>
-          </ul>
+      <section
+        id="about-section"
+        class="px-3 d-flex align-items-center full-page w-100 mx-auto"
+      >
+        <div class="w-100 my-5 p-3 bg-white shadow">
+          <h2 class="fw-bold fs-1 text-uppercase w-75 mx-auto">About</h2>
+          <p class="mx-auto w-75">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Consequuntur sit aut repellendus quasi libero rerum voluptatem quam
+            minus, et necessitatibus provident veniam quas sed laboriosam illo
+            iusto quis ratione placeat.
+          </p>
+          <div class="my-5">
+            <h2 class="text-center">Contact us</h2>
+            <form action="#" class="d-flex flex-column">
+              <label for="name">Name</label>
+              <input type="text" id="name" />
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" />
+              <label for="subject">Subject</label>
+              <input type="text" name="subject" id="subject" />
+              <label for="message">Message</label>
+              <textarea
+                name="message"
+                id="message"
+                cols="30"
+                rows="4"
+              ></textarea>
+            </form>
+          </div>
         </div>
       </section>
     </main>

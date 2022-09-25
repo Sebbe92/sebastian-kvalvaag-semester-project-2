@@ -3,7 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="img/icons/apple-touch-icon.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="img/icons/favicon-32x32.png"
+  />
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="img/icons/favicon-16x16.png"
+  />
+  <link rel="manifest" href="img/icons/site.webmanifest" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/custom.css" />
     <title>Admin | Add Product</title>
@@ -110,8 +127,12 @@
           >
             <ul class="added-products" id="added-products-container"></ul>
             <p id="cost-of-all-items" class="text-end"></p>
-            <button id="checkout">Go To Checkout</button>
-            <button id="cancel">Continue Shopping</button>
+            <button id="checkout-cart" class="btn btn-success m-2">
+              Go To Checkout
+            </button>
+            <button id="cancel-cart" class="btn btn-primary m-2">
+              Continue Shopping
+            </button>
           </div>
         </div>
       </nav>
