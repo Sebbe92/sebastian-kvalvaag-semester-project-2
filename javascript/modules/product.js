@@ -128,7 +128,7 @@ export class product {
     } else {
       imageUrl = `/img/logo-stock-img.png`;
     }
-    if (location.pathname == "/index.html") {
+    if (location.pathname == "/index.html" || location.pathname == "/") {
       col = "";
     }
     const newHtml = `<div class="shadow card ${col} mt-3" id="card-${this.id}" >
