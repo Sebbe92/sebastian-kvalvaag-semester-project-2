@@ -16,7 +16,7 @@ export async function getJWT(apiUrl, userName, password) {
       }),
     });
     const result = await response.json();
-    console.log(result);
+
     return result.jwt;
   } catch (error) {
     console.error(error);
@@ -37,6 +37,7 @@ export async function getProducts(params) {
   try {
     const response = await fetch(`${productURL}?${params}`);
     const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.error(error);
@@ -64,7 +65,7 @@ export async function postProduct(product, jwt) {
       body: JSON.stringify(product),
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   } catch (error) {
     console.error(error);
@@ -80,7 +81,7 @@ export async function uploadImg(formData, jwt) {
       body: formData,
     });
     const response = await result.json();
-    console.log(response);
+
     return response;
   } catch (error) {
     console.log(error);

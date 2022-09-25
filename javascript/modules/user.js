@@ -12,7 +12,6 @@ export class user {
       if (this.jwt) {
         this.password = "";
         localStorage.setItem("user", JSON.stringify(this));
-        console.log(this.jwt);
       } else {
         console.log("error");
         return false;

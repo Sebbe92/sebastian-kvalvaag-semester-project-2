@@ -124,15 +124,6 @@ p {
   margin-right: 75%;
 }
 
-.card-body_price {
-  top: -30px;
-  right: 5px;
-  color: #fff;
-  background-color: #002632;
-  border-radius: 50vw;
-  border: 1px solid black;
-}
-
 .circle {
   width: 25px;
   height: 25px;
@@ -594,6 +585,7 @@ nav {
           flex-direction: column;
   padding: 0;
   margin: 0 5px;
+  background-color: #fff;
   border: 1px solid #ffffff;
 }
 
@@ -607,6 +599,28 @@ nav {
 
 .product-link {
   text-decoration: none;
+}
+
+.card-body_price {
+  top: -30px;
+  right: 5px;
+  color: #fff;
+  background-color: #002632;
+  border-radius: 50vw;
+  border: 1px solid black;
+}
+
+.full-page .card {
+  width: 25%;
+  max-width: 300px !important;
+}
+
+.full-page .card-title {
+  color: #fff;
+}
+
+.full-page svg path {
+  fill: #fff;
 }
 
 .dot_container {

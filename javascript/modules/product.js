@@ -1,4 +1,5 @@
 import { body } from "../utils/constants.js";
+import { getLocalUser } from "../utils/utils.js";
 import { GetImgById, postProduct } from "./apiCalls.js";
 import { makeDropdownHtml } from "./forms.js";
 
@@ -11,8 +12,8 @@ export class product {
     sizes,
     specs,
     imageIds,
-    id = "",
-    images = []
+    featured = false,
+    id = ""
   ) {
     (this.title = title),
       (this.price = price),
@@ -20,9 +21,10 @@ export class product {
       (this.color = colors),
       (this.size = sizes),
       (this.specs = specs),
-      (this.image_url = imageIds);
-    this.id = id;
-    this.images = images;
+      (this.image_url = imageIds),
+      (this.id = id),
+      (this.images = []),
+      (this.featured = featured);
   }
 
   async getImageDetails() {
@@ -53,7 +55,6 @@ export class product {
       }
     }
     sizesHtml = makeDropdownHtml("Size", this.size, "radio");
-    console.log(sizesHtml);
     this.specs.forEach((category) => {
       categoriesHtml += `<li>${category}</li>`;
     });
@@ -168,8 +169,7 @@ export class product {
   </li>`;
   }
   publishProduct() {
-    const jwt = JSON.parse(localStorage.getItem("user")).jwt;
-    postProduct(this, jwt);
+    postProduct(this, getLocalUser().jwt);
   }
   parseLists() {
     if (this.color) {
@@ -212,9 +212,6 @@ export class product {
     if (!modal.open) {
       modal.showModal();
     }
-
-    console.log(currentImageIndex);
-
     const closeImageModalBtn = document.querySelector("#close-img-modal");
     const nextBtn = document.querySelector("#next-img-button");
     const prevBtn = document.querySelector("#previus-img-button");
@@ -228,7 +225,6 @@ export class product {
     nextBtn.addEventListener("click", () => {
       currentImageIndex++;
       if (currentImageIndex >= this.images.length) {
-        console.log("bigger");
         currentImageIndex = 0;
       }
       this.fullImageModal(currentImageIndex);

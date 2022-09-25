@@ -28,6 +28,10 @@ export async function loginFormSetup(form) {
   });
 }
 
+export function logout() {
+  localStorage.removeItem("user");
+}
+
 export function redirect(page) {
   location.href = `${page}`;
 }

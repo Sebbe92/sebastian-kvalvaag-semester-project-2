@@ -24,6 +24,7 @@ export function makeForm(
   categories = true,
   colors = true,
   sizes = true,
+  featured = true,
   files = true
 ) {
   let formHtml = `<form action="#" class="col-12 col-lg-5 d-flex flex-column mb-2" id="product_form">`;
@@ -58,6 +59,12 @@ product-description"
   if (sizes) {
     formHtml += makeDropdownHtml("Sizes", productSizes, "checkbox");
   }
+  if (featured) {
+    formHtml += `<div class="d-flex flex-column">
+    <label for="featured">Featured</label>
+    <input type="checkbox" name="featured" id="featured" />
+  </div>`;
+  }
   formHtml += `</div>`;
 
   formHtml += `<button type="submit" class="btn btn-primary">Preview</button><div id="message-container"</form>`;
@@ -89,7 +96,7 @@ function imageUploadSubmit() {
     e.preventDefault();
     uploadPreview.innerHTML = `<div class="dots"></div>`;
     const data = new FormData(e.target);
-
+    console.log(getLocalUser());
     uploadImg(data, getLocalUser().jwt).then((imgs) => {
       imgs.forEach((img) => {
         uploadedFiles.push(img);
@@ -164,12 +171,14 @@ export function addDropdownListeners() {
     });
   });
 }
+const productForm = document.querySelector("product_form");
 
 async function makeProductFromForm(e, images) {
   const imgIds = [];
   const colors = [];
   const sizes = [];
   const categories = [];
+  let featured = false;
   if (images.length >= 4) {
     images.forEach((img) => {
       imgIds.push(img.id);
@@ -189,6 +198,11 @@ async function makeProductFromForm(e, images) {
     if (e.target[i].name == "Categories" && e.target[i].checked) {
       categories.push(e.target[i].id);
     }
+    if (e.target[i].id == "featured" && e.target[i].checked) {
+      if (e.target[i].value == "on") {
+        featured = true;
+      }
+    }
   }
   if (!colors.length || !sizes.length || !categories.length) {
     userMessage("product needs atleast 1 color 1 size and 1 category");
@@ -205,7 +219,8 @@ async function makeProductFromForm(e, images) {
     colors,
     sizes,
     categories,
-    imgIds
+    imgIds,
+    featured
   );
   const displayContainer = document.querySelector("#product_container_dialog");
 
@@ -220,7 +235,7 @@ async function makeProductFromForm(e, images) {
       e.preventDefault();
       newProduct.stringifyLists();
       newProduct.publishProduct();
-      clearForm();
+      /* clearForm(productForm); */
     });
     cancelBtn.addEventListener("click", (e) => {
       displayContainer.innerHTML = "";

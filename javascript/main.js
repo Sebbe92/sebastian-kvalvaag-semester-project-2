@@ -50,6 +50,9 @@ let currentCategory = "all";
 let currentProducts = [];
 let productsToLoad = 10;
 const secNavCategoryBtns = document.querySelectorAll(".category-btn_sec-nav");
+window.addEventListener("resize", navBarSetup);
+navBarSetup();
+updateShoppingcart();
 if (location.pathname == "/add-products.html") {
   if (getLocalUser()) {
     if (productFormContainer) {
@@ -65,22 +68,30 @@ if (location.pathname == "/products.html") {
       main.scrollTo(0, main.scrollHeight - main.clientHeight - 2);
       if (productsToLoad < currentProducts.length) {
         productsToLoad = productsToLoad + 10;
-        makeProducts(currentProducts, productsOutput);
+        makeProducts();
       }
     }
   });
+  if (productsOutput) {
+    if (location.search) {
+      const newParams = new URLSearchParams(location.search);
+      if (newParams.get("category")) {
+        currentCategory = newParams.get("category");
+      }
+    }
+    makeProducts();
+    secNavSetup();
+  }
 }
 
 if (location.pathname == "/index.html") {
   setupHeroImg();
+  makeProducts();
 }
 
 if (main) {
   main.style.height = `calc(100vh - ${header.clientHeight}px)`;
 }
-window.addEventListener("resize", navBarSetup);
-navBarSetup();
-updateShoppingcart();
 
 if (location.pathname == "/product-page.html") {
   let currentProduct = {};
@@ -141,21 +152,12 @@ if (loginForm) {
   loginFormSetup(loginForm);
 }
 
-if (productsOutput) {
-  if (location.search) {
-    const newParams = new URLSearchParams(location.search);
-    if (newParams.get("category")) {
-      currentCategory = newParams.get("category");
-    }
-  }
-  makeProducts();
-  secNavSetup();
-}
 async function displayProducts() {
   productsOutput.innerHTML += `<div class="dot_container"></div>`;
   makeDots();
   dotsTimer();
   let newHtml = "";
+
   if (currentCategory == "all") {
     for (let i = productsToLoad - 10; i < productsToLoad; i++) {
       if (!currentProducts[i]) {
@@ -334,7 +336,11 @@ function updateShoppingcart() {
   }
 }
 async function makeProducts() {
-  getProducts(``).then((list) => {
+  let params = "";
+  if (location.pathname == "/index.html") {
+    params = "featured=true";
+  }
+  getProducts(params).then((list) => {
     list.forEach((item) => {
       const newProduct = new product(
         item.title,
@@ -344,17 +350,20 @@ async function makeProducts() {
         item.size,
         item.specs,
         item.image_url,
+        item.featured,
         item.id
       );
       if (
         currentProducts.findIndex((product) => {
-          return product.id == newProduct.id;
+          return product.title == newProduct.title;
         }) == -1
       ) {
+        console.log(newProduct);
         newProduct.parseLists();
         currentProducts.push(newProduct);
       }
     });
+    console.log(currentProducts);
     displayProducts();
   });
 }
