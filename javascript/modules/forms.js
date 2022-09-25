@@ -96,7 +96,6 @@ function imageUploadSubmit() {
     e.preventDefault();
     uploadPreview.innerHTML = `<div class="dots"></div>`;
     const data = new FormData(e.target);
-    console.log(getLocalUser());
     uploadImg(data, getLocalUser().jwt).then((imgs) => {
       imgs.forEach((img) => {
         uploadedFiles.push(img);
@@ -250,7 +249,4 @@ function productFormSubmit() {
     e.preventDefault();
     makeProductFromForm(e, uploadedFiles);
   });
-}
-function validateForm(form) {
-  console.log(form);
 }

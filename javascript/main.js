@@ -129,7 +129,7 @@ if (cartBtn) {
 }
 if (snapScrollContainer) {
   snapScrollContainer.addEventListener("scroll", (e) => {
-    if (snapScrollContainer.scrollTop >= window.innerHeight) {
+    if (snapScrollContainer.scrollTop >= main.clientHeight + 20) {
       snapScrollContainer.style.scrollSnapType = "none";
     } else {
       snapScrollContainer.style.scrollSnapType = "y mandatory";
@@ -358,12 +358,10 @@ async function makeProducts() {
           return product.title == newProduct.title;
         }) == -1
       ) {
-        console.log(newProduct);
         newProduct.parseLists();
         currentProducts.push(newProduct);
       }
     });
-    console.log(currentProducts);
     displayProducts();
   });
 }

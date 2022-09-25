@@ -43,6 +43,10 @@
     <link rel="manifest" href="img/icons/site.webmanifest" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/custom.css" />
+    <meta
+      name="description"
+      content="It Suits You is a e-commerce website where you can buy designer suits"
+    />
     <title>It Suites You</title>
   </head>
   <body class="position-relative">
@@ -119,7 +123,8 @@
                 <a
                   class="nav-link position-relative test-btn"
                   aria-current="page"
-                  href="#"
+                  href="about.html"
+                  id="about-btn"
                 >
                   <p class="position-absolute btn-font-big m-0">About</p>
                   <p class="btn-font-small m-0">About</p>
@@ -210,43 +215,13 @@
           ></ul>
         </div>
       </section>
-      <section
-        id="products-output"
-        class="d-flex m-0 mb-5 fullpage"
-        dir="ltr"
-      ></section>
-
-      <section
-        id="about-section"
-        class="px-3 d-flex align-items-center full-page w-100 mx-auto"
-      >
-        <div class="w-100 my-5 p-3 bg-white shadow">
-          <h2 class="fw-bold fs-1 text-uppercase w-75 mx-auto">About</h2>
-          <p class="mx-auto w-75">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequuntur sit aut repellendus quasi libero rerum voluptatem quam
-            minus, et necessitatibus provident veniam quas sed laboriosam illo
-            iusto quis ratione placeat.
-          </p>
-          <div class="my-5">
-            <h2 class="text-center">Contact us</h2>
-            <form action="#" class="d-flex flex-column">
-              <label for="name">Name</label>
-              <input type="text" id="name" />
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" />
-              <label for="subject">Subject</label>
-              <input type="text" name="subject" id="subject" />
-              <label for="message">Message</label>
-              <textarea
-                name="message"
-                id="message"
-                cols="30"
-                rows="4"
-              ></textarea>
-            </form>
-          </div>
-        </div>
+      <section class="w-100 scroll-snap_item">
+        <h2 class="text-white text-center">Featured Prodcuts</h2>
+        <div
+          id="products-output"
+          class="d-flex justify-content-center m-0 mb-5"
+          dir="ltr"
+        ></div>
       </section>
     </main>
     <footer></footer>

@@ -13,7 +13,6 @@ export async function loginFormSetup(form) {
       removeUserMessage();
       const currentUser = new user(adminUrl, userName, password);
       currentUser.login().then(() => {
-        console.log(currentUser.jwt);
         if (!currentUser.jwt == "") {
           userMessage("Success!");
           redirect("add-products.html");

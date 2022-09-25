@@ -615,14 +615,6 @@ nav {
   max-width: 300px !important;
 }
 
-.full-page .card-title {
-  color: #fff;
-}
-
-.full-page svg path {
-  fill: #fff;
-}
-
 .dot_container {
   margin-top: 35vh;
   -ms-flex-item-align: center;

@@ -6,11 +6,18 @@ import {
   main,
 } from "../utils/constants.js";
 import { getLocalUser } from "../utils/utils.js";
-import { logout } from "./login.js";
+import { loginFormSetup, logout } from "./login.js";
 
 export function navBarSetup() {
+  /* const aboutBtn = document.querySelector("#about-btn");
+  aboutBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    location.pathname = "/index.html";
+    setTimeout(() => {
+      location.search = "about";
+    }, 50);
+  }); */
   if (getLocalUser()) {
-    console.log(getLocalUser());
     navBarContainer.children[0].innerHTML += `<li class="nav-item">
     <a
       class="nav-link position-relative test-btn active"
@@ -42,7 +49,6 @@ function handleNavDropdown(e) {
   if (navBarContainer.style.transform == `translateY(${navHeight}px)`) {
     navBarContainer.style.transform = "translateY(-200px)";
   } else {
-    console.log(navBarContainer.style.transform);
     navBarContainer.style.transform = `translateY(${navHeight}px)`;
   }
 }

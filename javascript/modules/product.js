@@ -1,4 +1,4 @@
-import { body } from "../utils/constants.js";
+import { body, head } from "../utils/constants.js";
 import { getLocalUser } from "../utils/utils.js";
 import { GetImgById, postProduct } from "./apiCalls.js";
 import { makeDropdownHtml } from "./forms.js";
@@ -42,11 +42,14 @@ export class product {
     return colorsHtml;
   }
   createProductPage(location) {
-    console.log(this);
     let categoriesHtml = "";
     const colorsHtml = this.createColorsHtml();
     let sizesHtml = "";
     const imagesurl = [];
+    head.innerHTML += `<meta
+    name="description"
+    content="${this.description}"
+  />`;
     for (var i = 0; i < this.images.length; i++) {
       if (!this.images[i].formats) {
         imagesurl.push(`/img/logo-stock-img.png`);
@@ -118,14 +121,17 @@ export class product {
     if (this.color) {
       colorsHtml = this.createColorsHtml();
     }
-
+    let col = "col";
     let imageUrl = "";
     if (this.images[0].formats) {
       imageUrl = this.images[0].formats.small.url;
     } else {
       imageUrl = `/img/logo-stock-img.png`;
     }
-    const newHtml = `<div class="shadow card col mt-3" id="card-${this.id}" >
+    if (location.pathname == "/index.html") {
+      col = "";
+    }
+    const newHtml = `<div class="shadow card ${col} mt-3" id="card-${this.id}" >
     <a href="product-page.html?id=${this.id}" class="">
     <div class="square-img-frame ">
     <img
