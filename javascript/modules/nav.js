@@ -17,14 +17,11 @@ export function navBarSetup() {
   }
 }
 function handleNavDropdown(e) {
-  console.log(navBarContainer.style.transform);
   if (navBarContainer.style.transform == `translateY(${navHeight}px)`) {
     navBarContainer.style.transform = "translateY(-200px)";
   } else {
     console.log(navBarContainer.style.transform);
     navBarContainer.style.transform = `translateY(${navHeight}px)`;
-    console.log(navBarContainer.style.transform);
-    main.addEventListener("click", handleNavDropdownClose);
   }
 }
 function handleNavDropdownClose(e) {

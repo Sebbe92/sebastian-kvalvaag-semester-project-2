@@ -43,11 +43,5 @@ export function removeFromShoppingCart(id) {
   const currentCart = JSON.parse(localStorage.getItem("shoppingcart"));
 
   currentCart.splice(id, 1);
-  console.log(
-    currentCart,
-    currentCart.filter((item) => {
-      return item.id == id;
-    })
-  );
   localStorage.setItem("shoppingcart", JSON.stringify(currentCart));
 }

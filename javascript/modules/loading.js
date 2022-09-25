@@ -23,45 +23,46 @@ function moveDots() {
     dot.style.width = "10px";
     dot.style.background = "#002632";
   });
-
-  dots[currentDot].style.width = `${dotMaxWidth}px`;
-  dots[currentDot].style.background = "#002632";
-  if (dots[currentDot - 1]) {
-    dots[currentDot - 1].style.width = `${dotMaxWidth - dotStep * 1}px`;
-  }
-  if (dots[currentDot + 1]) {
-    dots[currentDot + 1].style.width = `${dotMaxWidth - dotStep * 1}px`;
-  }
-  if (dots[currentDot - 2]) {
-    dots[currentDot - 2].style.width = `${dotMaxWidth - dotStep * 2}px`;
-  }
-  if (dots[currentDot + 2]) {
-    dots[currentDot + 2].style.width = `${dotMaxWidth - dotStep * 2}px`;
-  }
-  if (dots[currentDot - 3]) {
-    dots[currentDot - 3].style.width = `${dotMaxWidth - dotStep * 3}px`;
-  }
-  if (dots[currentDot + 3]) {
-    dots[currentDot + 3].style.width = `${dotMaxWidth - dotStep * 3}px`;
-  }
-  if (dots[currentDot - 4]) {
-    dots[currentDot - 4].style.width = `${dotMaxWidth - dotStep * 4}px`;
-  }
-  if (dots[currentDot + 4]) {
-    dots[currentDot + 4].style.width = `${dotMaxWidth - dotStep * 4}px`;
-  }
-  if (dots[currentDot - 5]) {
-    dots[currentDot - 5].style.width = `${dotMaxWidth - dotStep * 5}px`;
-  }
-  if (dots[currentDot + 5]) {
-    dots[currentDot + 5].style.width = `${dotMaxWidth - dotStep * 5}px`;
-  }
-  if (dots[currentDot - 6]) {
-    dots[currentDot - 6].style.width = `${dotMaxWidth - dotStep * 6}px`;
-  }
-  if (dots[currentDot + 6]) {
-    dots[currentDot + 6].style.width = `${dotMaxWidth - dotStep * 6}px`;
-  }
+  try {
+    dots[currentDot].style.width = `${dotMaxWidth}px`;
+    dots[currentDot].style.background = "#002632";
+    if (dots[currentDot - 1]) {
+      dots[currentDot - 1].style.width = `${dotMaxWidth - dotStep * 1}px`;
+    }
+    if (dots[currentDot + 1]) {
+      dots[currentDot + 1].style.width = `${dotMaxWidth - dotStep * 1}px`;
+    }
+    if (dots[currentDot - 2]) {
+      dots[currentDot - 2].style.width = `${dotMaxWidth - dotStep * 2}px`;
+    }
+    if (dots[currentDot + 2]) {
+      dots[currentDot + 2].style.width = `${dotMaxWidth - dotStep * 2}px`;
+    }
+    if (dots[currentDot - 3]) {
+      dots[currentDot - 3].style.width = `${dotMaxWidth - dotStep * 3}px`;
+    }
+    if (dots[currentDot + 3]) {
+      dots[currentDot + 3].style.width = `${dotMaxWidth - dotStep * 3}px`;
+    }
+    if (dots[currentDot - 4]) {
+      dots[currentDot - 4].style.width = `${dotMaxWidth - dotStep * 4}px`;
+    }
+    if (dots[currentDot + 4]) {
+      dots[currentDot + 4].style.width = `${dotMaxWidth - dotStep * 4}px`;
+    }
+    if (dots[currentDot - 5]) {
+      dots[currentDot - 5].style.width = `${dotMaxWidth - dotStep * 5}px`;
+    }
+    if (dots[currentDot + 5]) {
+      dots[currentDot + 5].style.width = `${dotMaxWidth - dotStep * 5}px`;
+    }
+    if (dots[currentDot - 6]) {
+      dots[currentDot - 6].style.width = `${dotMaxWidth - dotStep * 6}px`;
+    }
+    if (dots[currentDot + 6]) {
+      dots[currentDot + 6].style.width = `${dotMaxWidth - dotStep * 6}px`;
+    }
+  } catch (error) {}
 }
 
 export function dotsTimer() {

@@ -89,7 +89,7 @@ function imageUploadSubmit() {
     e.preventDefault();
     uploadPreview.innerHTML = `<div class="dots"></div>`;
     const data = new FormData(e.target);
-    console.log(data, getLocalUser().jwt);
+
     uploadImg(data, getLocalUser().jwt).then((imgs) => {
       imgs.forEach((img) => {
         uploadedFiles.push(img);
@@ -111,7 +111,6 @@ function addRemoveBtns(uploadPreview) {
         }
       });
       deleteImg(e.path[0].id, getLocalUser().jwt);
-      console.log(uploadedFiles);
       uploadPreview.innerHTML = imagePreview(uploadedFiles);
       addRemoveBtns(uploadPreview);
     });
@@ -134,7 +133,6 @@ export function makeDropdownHtml(label, trait, inputType) {
   return newHtml;
 }
 function dropdownClose() {
-  console.log(this.children[1]);
   this.children[1].classList.remove("active");
   this.removeEventListener("pointerleave", dropdownClose);
 }
@@ -144,7 +142,6 @@ export function addDropdownListeners() {
     button.addEventListener("click", () => {
       button.nextSibling.nextSibling.classList.toggle("active");
 
-      console.log(button.parentElement.parentElement);
       button.parentElement.parentElement.addEventListener("click", (e) => {
         if (!e.path[0].nodeName == "DIV") {
           dropdownClose();
@@ -194,11 +191,11 @@ async function makeProductFromForm(e, images) {
     }
   }
   if (!colors.length || !sizes.length || !categories.length) {
-    console.log("product needs atleast 1 color 1 size and 1 category");
+    userMessage("product needs atleast 1 color 1 size and 1 category");
     return;
   }
   if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
-    console.log("product needs a title, price and description");
+    userMessage("product needs a title, price and description");
     return;
   }
   const newProduct = new product(

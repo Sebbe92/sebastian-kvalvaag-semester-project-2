@@ -154,7 +154,6 @@ p {
 }
 
 .banner {
-  background-image: url("../img/hero-pexels-the-lazy-artist-gallery-1342609.jpg");
   background-size: cover;
   color: #fff;
   display: -webkit-box;
@@ -179,20 +178,6 @@ p {
 
 .banner .banner_overlay p {
   max-width: 300px;
-}
-
-@media (min-width: 600px) {
-  .banner .banner:hover .banner_overlay {
-    background-color: #002632ea;
-  }
-}
-
-@media (max-width: 600px) {
-  .banner .banner_overlay {
-    width: 100%;
-    margin: 0;
-    background-color: #0026328f;
-  }
 }
 
 #categories-container ul {

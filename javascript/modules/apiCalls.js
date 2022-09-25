@@ -1,6 +1,7 @@
 const productURL = "https://it-suites-you.herokuapp.com/products";
 const uploadURL = "https://it-suites-you.herokuapp.com/upload";
 const filesURL = "https://it-suites-you.herokuapp.com/upload/files";
+const heroURL = "https://it-suites-you.herokuapp.com/home";
 export async function getJWT(apiUrl, userName, password) {
   try {
     const response = await fetch(apiUrl, {
@@ -35,6 +36,15 @@ export async function getProduct(id) {
 export async function getProducts(params) {
   try {
     const response = await fetch(`${productURL}?${params}`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+export async function getHero() {
+  try {
+    const response = await fetch(`${heroURL}`);
     const result = await response.json();
     return result;
   } catch (error) {
