@@ -56,6 +56,16 @@ if (location.pathname == "/add-products.html") {
     redirect("admin.html");
   }
 }
+if (location.pathname == "/products.html") {
+  main.addEventListener("scroll", (e) => {
+    console.log(main.scrollTop, main.scrollHeight - main.clientHeight);
+    if (main.scrollTop > main.scrollHeight - main.clientHeight - 1) {
+      main.scrollTo(0, main.scrollHeight - main.clientHeight - 2);
+      displayProducts();
+      productsToLoad = productsToLoad + 10;
+    }
+  });
+}
 const searchInput = document.querySelector("#search-input");
 if (main) {
   main.style.height = `calc(100vh - ${header.clientHeight}px)`;
@@ -375,12 +385,5 @@ function updateShoppingcart() {
   updateShoppingcart();
 } */
 window.addEventListener("resize", navBarSetup);
-main.addEventListener("scroll", (e) => {
-  console.log(main.scrollTop, main.scrollHeight - main.clientHeight);
-  if (main.scrollTop > main.scrollHeight - main.clientHeight - 1) {
-    main.scrollTo(0, main.scrollHeight - main.clientHeight - 2);
-    displayProducts();
-    productsToLoad = productsToLoad + 10;
-  }
-});
+
 navBarSetup();
