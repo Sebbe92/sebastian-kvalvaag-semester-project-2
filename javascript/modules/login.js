@@ -29,6 +29,7 @@ export async function loginFormSetup(form) {
 
 export function logout() {
   localStorage.removeItem("user");
+  redirect("/index.html");
 }
 
 export function redirect(page) {

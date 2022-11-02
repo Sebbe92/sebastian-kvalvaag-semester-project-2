@@ -144,6 +144,7 @@ function dropdownClose() {
 }
 export function addDropdownListeners() {
   const dropdownButtons = document.querySelectorAll(".dropdown_button");
+  console.log(dropdownButtons);
   dropdownButtons.forEach((button) => {
     button.addEventListener("click", () => {
       button.nextSibling.nextSibling.classList.toggle("active");
@@ -244,7 +245,7 @@ async function makeProductFromForm(e, images) {
 }
 function productFormSubmit() {
   const productForm = document.querySelector("#product_form");
-  validateForm(productForm);
+  /* validateForm(productForm); */
   productForm.addEventListener("submit", (e) => {
     e.preventDefault();
     makeProductFromForm(e, uploadedFiles);

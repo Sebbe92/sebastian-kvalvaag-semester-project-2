@@ -17,7 +17,9 @@ export function navBarSetup() {
       location.search = "about";
     }, 50);
   }); */
-  if (getLocalUser()) {
+
+  if (getLocalUser() && navBarContainer.children[0].children.length < 4) {
+    console.log();
     navBarContainer.children[0].innerHTML += `<li class="nav-item">
     <a
       class="nav-link position-relative test-btn active"
@@ -29,6 +31,7 @@ export function navBarSetup() {
       <p class="btn-font-small m-0">Logout</p>
     </a>
   </li>`;
+
     const logoutBtn = document.querySelector("#logout");
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();

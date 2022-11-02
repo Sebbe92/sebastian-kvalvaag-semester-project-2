@@ -83,7 +83,6 @@ if (location.pathname == "/products.html") {
     secNavSetup();
   }
 }
-console.log(location.pathname);
 if (location.pathname == "/index.html" || location.pathname == "/") {
   setupHeroImg();
   makeProducts();
@@ -337,7 +336,6 @@ function updateShoppingcart() {
 }
 async function makeProducts() {
   let params = "";
-  console.log(location.pathname);
   if (location.pathname == "/index.html" || location.pathname == "/") {
     params = "featured=true";
   }
