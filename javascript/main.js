@@ -1,36 +1,20 @@
-import {
-  getProduct,
-  getProducts,
-  getHero,
-  postProduct,
-  uploadImg,
-} from "./modules/apiCalls.js";
+import { getProduct, getProducts, getHero } from "./modules/apiCalls.js";
 import { loginFormSetup, redirect } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
-import {
-  makeForm,
-  makeDropdownHtml,
-  addDropdownListeners,
-  productCategories,
-} from "./modules/forms.js";
+import { makeForm, productCategories } from "./modules/forms.js";
 import {
   addToShoppingCart,
   getLocalUser,
-  imagePreview,
   removeFromShoppingCart,
 } from "./utils/utils.js";
 import {
   productFormContainer,
-  body,
   loginForm,
-  dropdown,
   productContainer,
-  currentUser,
   snapScrollContainer,
   cartBtn,
   categoriesListContainer,
-  navBarContainer,
   cartContainer,
   productsOutput,
   main,
@@ -41,6 +25,8 @@ const shoppingCartContainer = document.querySelector(
   "#added-products-container"
 );
 import { makeDots, dotsTimer } from "./modules/loading.js";
+const getIdInput = document.querySelector("#get-product-id_input");
+const getIdBtn = document.querySelector("#get-product_btn");
 const totalCostShoppingCart = document.querySelector("#cost-of-all-items");
 const closeShoppingcartBtn = document.querySelector("#cancel-cart");
 const mainBanner = document.querySelector("#main-banner");
@@ -57,6 +43,18 @@ if (location.pathname == "/add-products.html") {
   if (getLocalUser()) {
     if (productFormContainer) {
       makeForm(productFormContainer);
+      getIdBtn.addEventListener("click", () => {
+        const id = parseInt(getIdInput.value);
+        if (id) {
+          getProduct(id).then((product) => {
+            const form = document.querySelector("#product_form");
+            form.children[1].value = product.title;
+            console.log(product);
+          });
+        } else {
+          console.log("not a number");
+        }
+      });
     }
   } else {
     redirect("admin.html");

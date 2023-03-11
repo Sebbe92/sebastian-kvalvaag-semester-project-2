@@ -171,7 +171,7 @@ export function addDropdownListeners() {
     });
   });
 }
-const productForm = document.querySelector("product_form");
+const productForm = document.querySelector("#product_form");
 
 async function makeProductFromForm(e, images) {
   const imgIds = [];

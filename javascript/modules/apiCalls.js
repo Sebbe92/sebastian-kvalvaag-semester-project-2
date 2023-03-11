@@ -112,3 +112,19 @@ export async function deleteImg(id, jwt) {
     console.error(error);
   }
 }
+
+export async function updateProduct(id, newProduct) {
+  try {
+    const response = await fetch(filesURL + `/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(newProduct),
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
