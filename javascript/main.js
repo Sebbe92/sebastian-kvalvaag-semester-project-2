@@ -1,4 +1,9 @@
-import { getProduct, getProducts, getHero } from "./modules/apiCalls.js";
+import {
+  getProduct,
+  getProducts,
+  getHero,
+  supaBaseTest,
+} from "./modules/apiCalls.js";
 import { loginFormSetup, redirect } from "./modules/login.js";
 import { product } from "./modules/product.js";
 import { user } from "./modules/user.js";
@@ -39,6 +44,7 @@ const secNavCategoryBtns = document.querySelectorAll(".category-btn_sec-nav");
 window.addEventListener("resize", navBarSetup);
 navBarSetup();
 updateShoppingcart();
+supaBaseTest();
 if (location.pathname == "/add-products.html") {
   if (getLocalUser()) {
     if (productFormContainer) {

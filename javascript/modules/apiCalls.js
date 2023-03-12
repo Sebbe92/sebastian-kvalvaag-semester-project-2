@@ -1,7 +1,14 @@
+import { createClient } from "../../node_modules/@supabase/supabase-js";
+
+const supabaseUrl = "https://ouvhlecadpfeeybwslbx.supabase.co";
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 const productURL = "https://it-suites-you.herokuapp.com/products";
 const uploadURL = "https://it-suites-you.herokuapp.com/upload";
 const filesURL = "https://it-suites-you.herokuapp.com/upload/files";
 const heroURL = "https://it-suites-you.herokuapp.com/home";
+
 export async function getJWT(apiUrl, userName, password) {
   try {
     const response = await fetch(apiUrl, {
@@ -21,6 +28,13 @@ export async function getJWT(apiUrl, userName, password) {
   } catch (error) {
     console.error(error);
   }
+}
+export async function supaBaseTest() {
+  const { data: products, error } = await supabase
+    .from("isuProducts")
+    .select("*")
+    .order("id", true);
+  console.log(products, error);
 }
 
 export async function getProduct(id) {

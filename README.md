@@ -42,7 +42,7 @@ npm install
 
 ### Running
 
-upload to a server and pray that it works
+upload to a server
 or
 visit the live site here: https://fascinating-biscuit-e7cff4.netlify.app/
 
