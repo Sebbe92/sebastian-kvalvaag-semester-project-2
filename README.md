@@ -13,7 +13,6 @@ Main points of interest:
 - Custom API
 - Custom CMS
 - Design
--
 
 ## Built With
 
